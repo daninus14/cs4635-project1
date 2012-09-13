@@ -1,0 +1,18 @@
+<data>
+	<frame index="A" numberofshapes="2">
+		<shape>
+			<type>semi-circle</type>
+			<size>medium</size>
+			<rotationToLargestVerticalLine>0</rotationToLargestVerticalLine>
+			<location>
+				<vertical>top</vertical>
+				<horizontal>center</horizontal>
+			</location>
+		</shape>
+		<shape>
+			<type>semi-circle</type>
+			<size>medium</size>
+			<rotationToLargestVerticalLine>0</rotationToLargestVerticalLine>
+		</shape>
+	</frame>
+</data>
