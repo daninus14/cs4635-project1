@@ -27,6 +27,7 @@ pip-log.txt
 .mr.developer.cfg
 
 # examples and debugging
-.pdf
-.gif
-.txt
+*.pdf
+*.gif
+examples/sample-representation.txt
+instructions.docx

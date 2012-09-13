@@ -14,19 +14,35 @@ tags = [ "frame", "qframe", "sframe"]
 
 	Need to add relationships between figures to the algorithm
 
+	Consider all the rules! not just the best a->b rule, but rather loop through all of them
+	and choose the one that has the least difference_value for the rules!
+
 """
 
 def main():
 	print "Deserialising"
-	Example1XML = ET.parse("examples/example-based-on-1-1.xml")
-	# problem1XML = ET.parse("1-1.xml")
+	example1XML = ET.parse("examples/example-based-on-1-1.xml")
+	problem1XML = ET.parse("problems/1-1.xml")
 	# problem2XML = ET.parse("1-2.xml")
-	# problem3XML = ET.parse("1-3.xml")
+	problem3XML = ET.parse("problems/1-3.xml")
 	# problem4XML = ET.parse("1-4.xml")
 
-	[e1frames, e1qframes, e1solutions] = deSerializeXML(Example1XML)
-	solution = solve_analogy(e1frames, e1qframes, e1solutions)
-	print "\n\n\n\nExample 1: " + solution
+	[e1frames, e1qframes, e1solutions] = deSerializeXML(example1XML)
+	e1solution = solve_analogy(e1frames, e1qframes, e1solutions)
+	# pdb.set_trace()
+	print "Example 1: " + e1solution['sframe']
+	print "Example 1: " + str(e1solution)
+
+	[p1frames, p1qframes, p1solutions] = deSerializeXML(problem1XML)
+	p1solution = solve_analogy(p1frames, p1qframes, p1solutions)
+	print "Problem 1: " + p1solution['sframe']
+	print "Problem 1: " + str(p1solution)
+
+
+	[p3frames, p3qframes, p3solutions] = deSerializeXML(problem3XML)
+	p3solution = solve_analogy(p3frames, p3qframes, p3solutions)
+	print "Problem 3: " + p3solution['sframe']
+	print "Problem 3: " + str(p3solution)
 
 
 
@@ -64,7 +80,10 @@ def solve_analogy(frames, questionFrames, solutions):
 	# since right now we only have sets of 1 rules, proceed
 	best_sol_so_far = closest_matching_to_solutions[0]
 	for  curr_sol in closest_matching_to_solutions:
-		curr_sol["difference_value"] = closest_matching["rules"][0].get_difference_with_rule(curr_sol["rules"][0])
+		# curr_sol["difference_value"] = closest_matching["rules"][0].get_difference_with_rule(curr_sol["rules"][0])
+		curr_sol_rules_matching = find_closest_rules_matching(closest_matching["rules"], curr_sol["rules"])
+		curr_sol["difference_value"] = curr_sol_rules_matching["difference_value"]
+		curr_sol["rule_matchings"] = curr_sol_rules_matching["rule_matchings"]
 		if best_sol_so_far["difference_value"] > curr_sol["difference_value"]:
 			best_sol_so_far = curr_sol
 
@@ -75,7 +94,7 @@ def solve_analogy(frames, questionFrames, solutions):
 	# or find list of possible matchings for A - B considering rules and number of changes and possible matchings of figures
 	# find the rules also from C - X
 	# now compare rules from A - B to those from C - X
-	return str(best_sol_so_far) # "still, nothing yet"
+	return best_sol_so_far # "still, nothing yet"
 
 
 
@@ -97,15 +116,17 @@ def find_closest_rules_matching(rules_y, rules_x): # instead of rules, return a 
 		print rules_x
 		# 10 is the penalty for objects created from scracth. This should be a constant and not hard coded! change later!
 		return {"rule_matchings": [(None, rules_x)], "difference_value": len(rules_x)*10} 
-	elif len(rules_x) == 0:
-		print "should I be doing this? will this ever happen? It seems that if it does, before, it would just return" 
-		print "the closest_matching below with value -1...and hence not be accepted anyway. Figure it out!" 
+	# elif len(rules_x) == 0:
+	# 	print "should I be doing this? will this ever happen? It seems that if it does, before, it would just return" 
+	# 	print "the closest_matching below with value -1...and hence not be accepted anyway. Figure it out!" 
 	elif len(rules_y) > 0:
 		curr_y_rule = rules_y[0]
 		possibleRules = []
 		for index_x in range(len(rules_x) + 1):
 			if index_x == len(rules_x):
-				print "deletion case. I am not currently considering this possibility for rules"
+				stringToPrint = "deletion case. I am not currently considering this possibility for rules"
+				print stringToPrint
+
 			else:
 				curr_x_rule = rules_x[index_x]
 				rules_y_copy = copy.deepcopy(rules_y)
@@ -159,24 +180,46 @@ def find_closest_frames_matching(frames):
 	b_frame = frames[1]
 
 	if len(a_frame.figures) == 0 and len(b_frame.figures) == 0:
-		print "Decide what to return here. Should this ever be evaluated?"
+		# print "Decide what to return here. Should this ever be evaluated?" # This is just the terminal case
 		return {"rules": [], "value": 0} 
-	elif len(a_frame.figures) == 0:
+	elif len(a_frame.figures) == 0 or len(b_frame.figures) == 0:
 		# consider the case when there are no more figures remaining in a_frame, but there are some figures
 		# remaining in b_frame. This case calls for a rule of adding one figure and matching it. there are len(b_frame.figures)!
 		# turns to do this, but they are all really equivalent, then we can do this in just one turn by creating rules.
 		# note that even though this case should always be evaluated, since the addition has a +10 weight, it should never be 
 		# preferred over some transformation of a_frame.figures, unless none of those were deleted previously.
-		print "I am not currently considering deletion and/or addition cases"
-		print b_frame.figures
-		return {"rules": [], "value": 0} 
+		x_frame_figures = a_frame.figures or b_frame.figures
+		created_rules = []
+		created_rules_value = 0
+		for curr_x_fig in x_frame_figures:
+			curr_rule_created = curr_x_fig.get_rule_create_delete()
+			created_rules.append(curr_rule_created)
+			created_rules_value += curr_rule_created.get_change_value()
+
+		# print "I am not currently considering deletion and/or addition cases"
+		# print b_frame.figures
+		# print "I am now considering addition and deletion cases, and the result is this: " + str(created_rules_value)
+		return {"rules": created_rules, "value": created_rules_value} 
 	elif len(a_frame.figures) > 0:
 		curr_a_fig = a_frame.figures[0]
 		possibleRules = []
 		for index_b in range(len(b_frame.figures) + 1):
 			if index_b == len(b_frame.figures):
 				# consider deletion case for curr_a_fig
-				print "deletion case. I am not currently considering this possibility"
+				# stringToPrint = "deletion case. I am not currently considering this possibility"
+				# print stringToPrint
+				# pdb.set_trace()
+				frames_copy = copy.deepcopy(frames)
+				frames_copy[0].figures.remove(frames_copy[0].figures[0])
+				best_rule = find_closest_frames_matching(frames_copy)
+				rule_a_delete = curr_a_fig.get_rule_create_delete() 
+				possibleRules.append(
+							{	"rules": best_rule["rules"] + [rule_a_delete], 
+								"value": best_rule["value"] + rule_a_delete.get_change_value(),
+								"qframe": a_frame.index,
+								"sframe": b_frame.index
+							}
+						)
 			else:
 				# consider matching of curr_a_fig to b_frame.figures[index_b]
 				# pdb.set_trace()

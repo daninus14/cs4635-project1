@@ -98,12 +98,15 @@ class Figure(object):
 
 		return Rule(self,otherFigure,shape,size,rotation,vloc,hloc,vref,href)
 
-		print "need to come up with a way to find rule to match!"
+		# print "need to come up with a way to find rule to match!"
+
+	def get_rule_create_delete(self):
+		return Rule(self,None,0,0,0,0,0,0,0,10)
 
 
 class Rule(object):
 	"""docstring for Rule"""
-	def __init__(self, ga_fig, gb_fig, gshape, gsize, grotation, gvloc, ghloc, gvref, ghref):
+	def __init__(self, ga_fig, gb_fig, gshape, gsize, grotation, gvloc, ghloc, gvref, ghref, gcreatedelete=0):
 		super(Rule, self).__init__()
 		self.shape = gshape
 		self.size = gsize
@@ -114,22 +117,31 @@ class Rule(object):
 		self.horizontal_reflection = ghref
 		self.a_fig = ga_fig
 		self.b_fig = gb_fig
+		self.createdelete = gcreatedelete
 
 	def __str__(self):
+		if self.createdelete != 0:
+			return "Rule create-delete of " + self.a_fig.shape 
 		ruleStr = "Rule from " + self.a_fig.shape + " to " + self.b_fig.shape
 		return ruleStr
 
 	def __repr__(self):
+		if self.createdelete != 0:
+			return "<Rule: " + self.a_fig.shape + " <-> create-delete >"
 		ruleRepr = "<Rule: " + self.a_fig.shape + " -> " + self.b_fig.shape + ">"
 		return ruleRepr
 
 	def get_change_value(self):
+		if self.createdelete != 0:
+			return self.createdelete
 		# pdb.set_trace()
 		val = self.shape + self.size + self.rotation_to_largest_vertical_line + self.vertical_location
 		val += self.horizontal_location + self.vertical_reflection + self.horizontal_reflection
 		return val
 
 	def get_difference_with_rule(self, otherRule):
+		if self.createdelete != 0:
+			return abs(self.createdelete - otherRule.get_change_value())
 		total = 0
 		total += abs(self.shape - otherRule.shape)
 		total += abs(self.size - otherRule.size)
