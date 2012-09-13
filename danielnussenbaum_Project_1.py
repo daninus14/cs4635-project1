@@ -97,25 +97,28 @@ def find_closest_rules_matching(rules_y, rules_x): # instead of rules, return a 
 		print rules_x
 		# 10 is the penalty for objects created from scracth. This should be a constant and not hard coded! change later!
 		return {"rule_matchings": [(None, rules_x)], "difference_value": len(rules_x)*10} 
+	elif len(rules_x) == 0:
+		print "should I be doing this? will this ever happen? It seems that if it does, before, it would just return" 
+		print "the closest_matching below with value -1...and hence not be accepted anyway. Figure it out!" 
 	elif len(rules_y) > 0:
-		curr_a_fig = rules_y[0]
+		curr_y_rule = rules_y[0]
 		possibleRules = []
 		for index_x in range(len(rules_x) + 1):
 			if index_x == len(rules_x):
-				print "deletion case. I am not currently considering this possibility"
+				print "deletion case. I am not currently considering this possibility for rules"
 			else:
-				curr_b_fig = rules_x[index_x]
+				curr_x_rule = rules_x[index_x]
 				rules_y_copy = copy.deepcopy(rules_y)
 				rules_x_copy = copy.deepcopy(rules_x)
 				rules_y_copy.remove(rules_y_copy[0])
 				rules_x_copy.remove(rules_x_copy[index_x])
 				best_rule_matching = find_closest_rules_matching(rules_y_copy, rules_x_copy)
-				rule_a_b = curr_a_fig.get_rule_to_match(curr_b_fig) 
+				# rule_a_b = curr_y_rule.get_rule_to_match(curr_x_rule) 
 				possibleRules.append(
-							{	"rule_matchings": best_rule_matching["rule_matchings"] + [rule_a_b], 
-								"difference_value": best_rule_matching["difference_value"] + rule_a_b.get_change_value()
-							}
-						)
+					{	
+					"rule_matchings": best_rule_matching["rule_matchings"] + [(curr_y_rule, curr_x_rule)], # [rule_a_b], 
+					"difference_value": best_rule_matching["difference_value"] + curr_y_rule.get_difference_with_rule(curr_x_rule)
+					})
 		closest_matching = {"difference_value": -1, "rule_matchings": []}
 		for pr in possibleRules:
 			if closest_matching["difference_value"] == -1:
