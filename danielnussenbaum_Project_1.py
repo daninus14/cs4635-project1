@@ -10,7 +10,7 @@ tags = [ "frame", "qframe", "sframe"]
 """ 
 	Deleting and Adding figures from a frame 
 
-	Matching of a rule to another rule
+	Matching of a rule to another rule - finish find_closest_rules_matching!
 
 	Need to add relationships between figures to the algorithm
 
@@ -45,12 +45,12 @@ def solve_analogy(frames, questionFrames, solutions):
 	# print "questionFrames: " + str(questionFrames)
 	# print "frames: " + str(frames)
 	# print "solutions: " + str(solutions)
-	closest_matching = find_closest_matching(frames) 
+	closest_matching = find_closest_frames_matching(frames) 
 
 	question_solution_combinations = [[questionFrames[0], sol] for sol in solutions]
 	closest_matching_to_solutions = []
 	for qs_combo in question_solution_combinations:
-		closest_matching_to_solutions.append(find_closest_matching(qs_combo))
+		closest_matching_to_solutions.append(find_closest_frames_matching(qs_combo))
 
 	# print "\n\n\nclosest_matching_to_solutions: " + str(closest_matching_to_solutions)
 
@@ -77,7 +77,67 @@ def solve_analogy(frames, questionFrames, solutions):
 	# now compare rules from A - B to those from C - X
 	return str(best_sol_so_far) # "still, nothing yet"
 
-def find_closest_matching(frames):
+
+
+
+
+
+
+
+
+
+
+def find_closest_rules_matching(rules_y, rules_x): # instead of rules, return a list of 2-tuples of figures (rules) matched!
+
+	if len(rules_y) == 0 and len(rules_x) == 0:
+		print "Decide what to return here. Should this ever be evaluated?"
+		return {"rule_matchings": [], "difference_value": 0} 
+	elif len(rules_y) == 0:
+		print "I am not currently considering deletion and/or addition cases"
+		print rules_x
+		# 10 is the penalty for objects created from scracth. This should be a constant and not hard coded! change later!
+		return {"rule_matchings": [(None, rules_x)], "difference_value": len(rules_x)*10} 
+	elif len(rules_y) > 0:
+		curr_a_fig = rules_y[0]
+		possibleRules = []
+		for index_x in range(len(rules_x) + 1):
+			if index_x == len(rules_x):
+				print "deletion case. I am not currently considering this possibility"
+			else:
+				curr_b_fig = rules_x[index_x]
+				rules_y_copy = copy.deepcopy(rules_y)
+				rules_x_copy = copy.deepcopy(rules_x)
+				rules_y_copy.remove(rules_y_copy[0])
+				rules_x_copy.remove(rules_x_copy[index_x])
+				best_rule_matching = find_closest_rules_matching(rules_y_copy, rules_x_copy)
+				rule_a_b = curr_a_fig.get_rule_to_match(curr_b_fig) 
+				possibleRules.append(
+							{	"rule_matchings": best_rule_matching["rule_matchings"] + [rule_a_b], 
+								"difference_value": best_rule_matching["difference_value"] + rule_a_b.get_change_value()
+							}
+						)
+		closest_matching = {"difference_value": -1, "rule_matchings": []}
+		for pr in possibleRules:
+			if closest_matching["difference_value"] == -1:
+				closest_matching = pr
+			elif closest_matching["difference_value"] > pr["difference_value"]:
+				closest_matching = pr
+
+		return closest_matching
+
+	return "find_closest_rules_matching() has failed to find a matching rule"
+
+
+
+
+
+
+
+
+
+
+
+def find_closest_frames_matching(frames):
 	""" This is a recursive function! 
 		this method will get the first figure on frame A and match it to n (# figures in frame B) + 1 possible choices
 		for frame B, which are a match between any 2, and 1 for deletion. Or actually, just n*2 because whenever deleted, 
@@ -92,7 +152,6 @@ def find_closest_matching(frames):
 		As of now this method is searching for exact rules to transform frame A to frame B, however, the exactness of
 		such matching depends on how well different rules work with the possible solutions for C to X.
 	"""
-	result = False
 	a_frame = frames[0]
 	b_frame = frames[1]
 
@@ -125,7 +184,7 @@ def find_closest_matching(frames):
 				# frames_copy[1].figures.remove(curr_b_fig)
 				frames_copy[1].figures.remove(frames_copy[1].figures[index_b])
 				# print "\n\nClosest Matching Called"
-				best_rule = find_closest_matching(frames_copy)
+				best_rule = find_closest_frames_matching(frames_copy)
 				# print "best_rule: " + str(best_rule)
 				rule_a_b = curr_a_fig.get_rule_to_match(curr_b_fig) 
 				# print "rule_a_b: " + str(rule_a_b)
@@ -150,7 +209,8 @@ def find_closest_matching(frames):
 
 		return closest_matching
 
-	return "find_closest_matching() has failed to find a matching rule"
+	return "find_closest_frames_matching() has failed to find a matching rule"
+
 
 def deSerializeXML(problem):
 	""" This method is to get the frames, questionFrames, and solutions nodes """

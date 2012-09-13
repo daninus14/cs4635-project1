@@ -82,7 +82,9 @@ class Figure(object):
 		if otherFigure.shape != self.shape:
 			shape = 5
 		if otherFigure.size != self.size:
-			shape = 1
+			# Eventually have some sort of scale dependency where the value is not actually one, 
+			# but rather self.size - otherFigure.size
+			shape = 1 
 		if otherFigure.rotation_to_largest_vertical_line != self.rotation_to_largest_vertical_line:
 			rotation = 1
 		if otherFigure.vertical_location != self.vertical_location:
