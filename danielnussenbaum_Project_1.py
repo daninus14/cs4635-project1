@@ -4,6 +4,7 @@ from Frame import *
 import copy
 # for debugging
 import pdb
+import pprint
 
 tags = [ "frame", "qframe", "sframe"]
 
@@ -12,7 +13,7 @@ tags = [ "frame", "qframe", "sframe"]
 
 	Matching of a rule to another rule - finish find_closest_rules_matching!
 
-	Need to add relationships between figures to the algorithm
+	No Need to add relationships between figures to the algorithm
 
 	Consider all the rules! not just the best a->b rule, but rather loop through all of them
 	and choose the one that has the least difference_value for the rules!
@@ -23,26 +24,65 @@ def main():
 	print "Deserialising"
 	example1XML = ET.parse("examples/example-based-on-1-1.xml")
 	problem1XML = ET.parse("problems/1-1.xml")
-	# problem2XML = ET.parse("1-2.xml")
+	problem2XML = ET.parse("problems/1-2.xml")
 	problem3XML = ET.parse("problems/1-3.xml")
 	# problem4XML = ET.parse("1-4.xml")
 
 	[e1frames, e1qframes, e1solutions] = deSerializeXML(example1XML)
 	e1solution = solve_analogy(e1frames, e1qframes, e1solutions)
 	# pdb.set_trace()
-	print "Example 1: " + e1solution['sframe']
-	print "Example 1: " + str(e1solution)
+	if len(e1solution) == 1:
+		print "Example 1: " + e1solution[0]['sframe']
+		print "Example 1: " + str(e1solution)
+	else:
+		print "\nExample 1 had the following " + str(len(e1solution)) + " solutions:"
+		for sol_index in range(len(e1solution)):
+			print "\t" + str(sol_index) + ". " + str(e1solution[sol_index])
 
 	[p1frames, p1qframes, p1solutions] = deSerializeXML(problem1XML)
 	p1solution = solve_analogy(p1frames, p1qframes, p1solutions)
-	print "Problem 1: " + p1solution['sframe']
-	print "Problem 1: " + str(p1solution)
+	if len(p1solution) == 1:
+		print "Problem 1: " + p1solution[0]['sframe']
+		print "Problem 1: " + str(p1solution)
+	else:
+		print "\nProblem 1 had the following " + str(len(p1solution)) + " solutions:"
+		for sol_index in range(len(p1solution)):
+			print "\t" + str(sol_index) + ". " + str(p1solution[sol_index])
+
+	[p2frames, p2qframes, p2solutions] = deSerializeXML(problem2XML)
+	p2solution = solve_analogy(p2frames, p2qframes, p2solutions)
+	if len(p2solution) == 1:
+		print "Problem 2: " + p2solution[0]['sframe']
+		print "Problem 2: " + str(p2solution)
+	else:
+		print "\nProblem 2 had the following " + str(len(p2solution)) + " solutions:"
+		for sol_index in range(len(p2solution)):
+			print "\t" + str(sol_index) + ". " + str(p2solution[sol_index])
 
 
 	[p3frames, p3qframes, p3solutions] = deSerializeXML(problem3XML)
 	p3solution = solve_analogy(p3frames, p3qframes, p3solutions)
-	print "Problem 3: " + p3solution['sframe']
-	print "Problem 3: " + str(p3solution)
+	if len(p3solution) == 1:
+		print "Problem 3: " + p3solution[0]['sframe']
+		print "Problem 3: " + str(p3solution)
+	else:
+		print "\nProblem 3 had the following " + str(len(p3solution)) + " solutions:"
+		for sol_index in range(len(p3solution)):
+			print "\t" + str(sol_index) + ". " + str(p3solution[sol_index])
+
+		if len(p3solution) >= 4:
+			for i in [1,3]:
+				print "\n\n\n\n\n" + str(i) + ":"
+				pprint.pprint(p3solution[i])
+				print "\n\n\n"
+				p3_rule_matchings = p3solution[i]['rule_matchings']
+				for rm in p3_rule_matchings:
+					pprint.pprint(rm)
+					pprint.pprint(str(rm[0]) + " : " + str(rm[0].get_change_value()))
+					pprint.pprint(str(rm[1]) + " : " + str(rm[1].get_change_value()))
+					pprint.pprint(rm[0].get_difference_with_rule(rm[1]))
+	# pprint.pprint()
+	# pdb.set_trace()
 
 
 
@@ -78,14 +118,17 @@ def solve_analogy(frames, questionFrames, solutions):
 	# to other rules (like location) than before
 
 	# since right now we only have sets of 1 rules, proceed
-	best_sol_so_far = closest_matching_to_solutions[0]
+	best_sol_so_far = [closest_matching_to_solutions[0]]
 	for  curr_sol in closest_matching_to_solutions:
+		# pdb.set_trace()
 		# curr_sol["difference_value"] = closest_matching["rules"][0].get_difference_with_rule(curr_sol["rules"][0])
 		curr_sol_rules_matching = find_closest_rules_matching(closest_matching["rules"], curr_sol["rules"])
 		curr_sol["difference_value"] = curr_sol_rules_matching["difference_value"]
 		curr_sol["rule_matchings"] = curr_sol_rules_matching["rule_matchings"]
-		if best_sol_so_far["difference_value"] > curr_sol["difference_value"]:
-			best_sol_so_far = curr_sol
+		if best_sol_so_far[0]["difference_value"] > curr_sol["difference_value"]:
+			best_sol_so_far = [curr_sol]
+		elif best_sol_so_far[0]["difference_value"] == curr_sol["difference_value"]:
+			best_sol_so_far.append(curr_sol)
 
 	# print "curr_sol: " + str(curr_sol) + " is the best answer!"
 
@@ -94,7 +137,8 @@ def solve_analogy(frames, questionFrames, solutions):
 	# or find list of possible matchings for A - B considering rules and number of changes and possible matchings of figures
 	# find the rules also from C - X
 	# now compare rules from A - B to those from C - X
-	return best_sol_so_far # "still, nothing yet"
+	return best_sol_so_far
+	# return closest_matching_to_solutions
 
 
 
@@ -109,11 +153,11 @@ def solve_analogy(frames, questionFrames, solutions):
 def find_closest_rules_matching(rules_y, rules_x): # instead of rules, return a list of 2-tuples of figures (rules) matched!
 
 	if len(rules_y) == 0 and len(rules_x) == 0:
-		print "Decide what to return here. Should this ever be evaluated?"
+		# print "Decide what to return here. Should this ever be evaluated?" TODO
 		return {"rule_matchings": [], "difference_value": 0} 
 	elif len(rules_y) == 0:
-		print "I am not currently considering deletion and/or addition cases"
-		print rules_x
+		# print "I am not currently considering deletion and/or addition cases" TODO
+		# print rules_x TODO
 		# 10 is the penalty for objects created from scracth. This should be a constant and not hard coded! change later!
 		return {"rule_matchings": [(None, rules_x)], "difference_value": len(rules_x)*10} 
 	# elif len(rules_x) == 0:
@@ -125,8 +169,7 @@ def find_closest_rules_matching(rules_y, rules_x): # instead of rules, return a 
 		for index_x in range(len(rules_x) + 1):
 			if index_x == len(rules_x):
 				stringToPrint = "deletion case. I am not currently considering this possibility for rules"
-				print stringToPrint
-
+				# print stringToPrint TODO
 			else:
 				curr_x_rule = rules_x[index_x]
 				rules_y_copy = copy.deepcopy(rules_y)
@@ -225,9 +268,7 @@ def find_closest_frames_matching(frames):
 				# pdb.set_trace()
 				curr_b_fig = b_frame.figures[index_b]
 				frames_copy = copy.deepcopy(frames)
-				# frames_copy[0].figures.remove(curr_a_fig)
 				frames_copy[0].figures.remove(frames_copy[0].figures[0])
-				# frames_copy[1].figures.remove(curr_b_fig)
 				frames_copy[1].figures.remove(frames_copy[1].figures[index_b])
 				# print "\n\nClosest Matching Called"
 				best_rule = find_closest_frames_matching(frames_copy)
@@ -254,8 +295,6 @@ def find_closest_frames_matching(frames):
 		# print "closest_matching: " + str(closest_matching)
 
 		return closest_matching
-
-	return "find_closest_frames_matching() has failed to find a matching rule"
 
 
 def deSerializeXML(problem):
