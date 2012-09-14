@@ -136,8 +136,13 @@ class Rule(object):
 
 	def __repr__(self):
 		if self.createdelete != 0:
-			return "<Rule: " + self.a_fig.shape + " <-> create-delete >"
-		ruleRepr = "<Rule: " + self.a_fig.shape + " -> " + self.b_fig.shape + ">"
+			return "<Rule: " + self.a_fig.shape + " - create-delete >"
+		changes = ""
+		for attribute in vars(self).keys():
+			if vars(self)[attribute] != 0 and attribute != 'a_fig' and attribute != "b_fig":
+				changes += " " + attribute + ","
+		changes = changes if changes != "" else " No Change"
+		ruleRepr = "<Rule: " + self.a_fig.shape + " - " + self.b_fig.shape + ":" + changes + ">"
 		return ruleRepr
 
 	def get_change_value(self):

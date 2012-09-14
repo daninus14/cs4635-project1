@@ -74,7 +74,7 @@
 			<rotation_to_largest_vertical_line>0</rotation_to_largest_vertical_line>
 			<vertical_location>center</vertical_location>
 			<horizontal_location>center</horizontal_location>
-			<vertical_reflection>center</vertical_reflection>
+			<vertical_reflection>False</vertical_reflection>
 			<horizontal_reflection>False</horizontal_reflection>
 		</figure>
 	</sframe>
