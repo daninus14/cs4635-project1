@@ -31,3 +31,8 @@ pip-log.txt
 *.gif
 examples/sample-representation.txt
 instructions.docx
+
+
+# Project related files not to be submitted
+*.zip
+*.docx
