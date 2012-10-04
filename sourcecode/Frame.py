@@ -1,5 +1,6 @@
 import xml.etree.ElementTree as ET
 from sourcecode.Figure import *
+from sourcecode.Rule import *
 
 class Frame:
 
