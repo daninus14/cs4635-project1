@@ -14,57 +14,34 @@ class Figure(object):
 
 		rotation_to_largest_vertical_line is in degrees (360 = 0 = 2*pi)
 
-		Also include an inside of, an outside off (with possibilities for above, below, center / left, right, center)
-
-		Consider the possibility of simply adding some list of arguments which basically weigh equally and are the same as 
-		the others, then, the system would be very very flexible
 	"""
-	def __init__(self, gshape, gsize, grotation, gvloc, ghloc, gvref, ghref):
+	def __init__(self, given_data):
 		super(Figure, self).__init__()
-		self.shape = gshape
-		self.size = gsize
-		self.rotation_to_largest_vertical_line = grotation
-		self.vertical_location = gvloc 
-		self.horizontal_location = ghloc 
-		self.vertical_reflection = gvref 
-		self.horizontal_reflection = ghref 
+		self.data = given_data
 
 	def __str__(self):
-		figureStr = "Figure " + self.shape + " of size " + self.size
+		if "shape" in self.data.keys() and "size" in self.data.keys():
+			figureStr = "Figure " + self.shape + " of size " + self.size
+		else:
+			figureStr = "shape __str__ definition needed!"
+			# should use some functional programming here! look it up in the documentation!
+			# idea is to take each field and give its name (key) and value
 		return figureStr
 
 	@classmethod
 	def deSerializeXML(cls, xmlObject):
 		""" TO DO: Add an index attribute!"""
 		propertiesXML = xmlObject.getchildren()
-		shape = "NA"
-		size = "NA"
-		rot = "NA"
-		vloc = "NA"
-		hloc = "NA"
-		vref = "NA"
-		href = "NA"
+		data = {}
 		for propertyXML in propertiesXML:
-			if propertyXML.tag == "shape":
-				shape = propertyXML.text
-			elif propertyXML.tag == "size": # actually, make a dictionary with values from very small, small, medium, large, very larg
-				size = propertyXML.text
-			elif propertyXML.tag == "rotation_to_largest_vertical_line": # do this based on each 45 degree rotation. so there are 360/8
-				rot = propertyXML.text
-			elif propertyXML.tag == "vertical_location":
-				vloc = propertyXML.text
-			elif propertyXML.tag == "horizontal_location":
-				hloc = propertyXML.text
-			elif propertyXML.tag == "vertical_reflection":
-				vref = propertyXML.text
-			elif propertyXML.tag == "horizontal_reflection":
-				href = propertyXML.text
+			if propertyXML.tag not in data.keys():
+				data[propertyXML.tag] = propertyXML.text
 			else:
-				print "property: " + str(propertyXML.tag) + " with value: " + str(propertyXML.text) + " not recognized"
+				print "property: " + str(propertyXML.tag) + " with value: " + str(propertyXML.text) + " already added!"
 
-		return cls(shape, size, rot, vloc, hloc, vref, href)
+		return cls(data)
 
-	def get_rule_to_match(self, otherFigure):
+	def get_rule_to_match(self, other_figure):
 		""" Include also a section for relationships for this rule and how they change, assign a weight of 2 for relationships,
 			so that a circle going outside of another circle is valued at 2, and the two circles together is also valued at 2 
 			(1 for each one of the circles moving) 
@@ -72,43 +49,30 @@ class Figure(object):
 			Although, a circle moving outside another circle would really have value 3, 2 for the relationship change, and 1 for 
 			the change in actual location
 		"""
-		vref = 0 
-		shape = 0
-		size = 0
-		rotation = 0
-		vloc = 0
-		hloc = 0
-		vref = 0
-		href = 0
-		if otherFigure.shape != self.shape:
-			shape = 1
-		if otherFigure.size != self.size:
-			# Eventually have some sort of scale dependency where the value is not actually one, 
-			# but rather self.size - otherFigure.size
-			size = 1 
-		if otherFigure.rotation_to_largest_vertical_line != self.rotation_to_largest_vertical_line:
-			rotation = 1
-		if otherFigure.vertical_location != self.vertical_location:
-			vloc = 1
-		if otherFigure.horizontal_location != self.horizontal_location:
-			hloc = 1
-		if self.vertical_reflection != otherFigure.vertical_reflection:
-			vref = 1
-		if self.horizontal_reflection != otherFigure.horizontal_reflection:
-			href = 1
+		if other_figure == None: return Rule(self, None, {}, 10)
 
-		return Rule(self,otherFigure,shape,size,rotation,vloc,hloc,vref,href)
+		rule_data = {}
 
-		# print "need to come up with a way to find rule to match!"
+		for property_key in self.data.keys():
+			if property_key in other_figure.data.keys():
+				if self.data[property_key] == other_figure.data[property_key]:
+					rule_data[property_key] = 0
+				else:
+					rule_data[property_key] = 1
+			else:
+				rule_data[property_key] = 2
+
+		return Rule(self,other_figure,rule_data)
+
 
 	def get_rule_create_delete(self):
-		return Rule(self,None,0,0,0,0,0,0,0,10)
+		return Rule(self,None,{},10)
 
 	def get_difference_to_figure(self, other_figure):
 		difference = 0
-		if set(vars(self).keys()) == set(vars(other_figure).keys()):
-			for skey in vars(self).keys():
-				difference += 0 if vars(self)[skey] == vars(other_figure)[skey] else 1
+		if set(self.data.keys()) == set(other_figure.data.keys()):
+			for skey in self.data.keys():
+				difference += 0 if self.data[skey] == other_figure.data[skey] else 1
 		else:
 			print "\n\n\tnot currently handling figures with different attributes"
 			print "\n\n"

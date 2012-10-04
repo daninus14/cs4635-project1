@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
 import sys 
 from sourcecode.Frame import *
+from sourcecode.Analogy import *
 import copy
 # for debugging
 import pdb
