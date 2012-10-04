@@ -58,10 +58,17 @@ class Rule(object):
 					total += 10
 
 		# this compares the transformation of the self rule to the other_rule
-		# difference = 0
-		if set(self.data.keys()) == set(other_rule.data.keys()):
-			for skey in self.data.keys():
+		for skey in self.data.keys():
+			if skey not in other_rule.data.keys():
+				total += 0 #4
+			else: 
 				total += 0 if self.data[skey] == other_rule.data[skey] else 2
+
+
+		# difference = 0
+		# if set(self.data.keys()) == set(other_rule.data.keys()):
+		# 	for skey in self.data.keys():
+		# 		total += 0 if self.data[skey] == other_rule.data[skey] else 2
 		# else:
 			# print "\n\n\tnot currently handling rules with different attributes"
 			# print "self.data.keys(): " + str(self.data.keys())
