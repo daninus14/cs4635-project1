@@ -49,10 +49,16 @@ class Figure(object):
 			Although, a circle moving outside another circle would really have value 3, 2 for the relationship change, and 1 for 
 			the change in actual location
 		"""
-		if other_figure == None: return Rule(self, None, {}, 10)
+		if other_figure == None: 
+			print "Figure.py:get_rule_to_match:53 This should never be called! "
+			return Rule(self, None, {}, 10)
 
-		rule_data = {}
+		rule_data = self.get_rule_difference_value(other_figure)
+		rule_data = self.get_rule_difference_value(other_figure, rule_data)
 
+		return Rule(self,other_figure,rule_data)
+
+	def get_rule_difference_value(self, other_figure, rule_data={}):
 		for property_key in self.data.keys():
 			if property_key in other_figure.data.keys():
 				if self.data[property_key] == other_figure.data[property_key]:
@@ -60,9 +66,9 @@ class Figure(object):
 				else:
 					rule_data[property_key] = 1
 			else:
+				print "Figure.py:get_rule_to_match:65 This should never be called! "
 				rule_data[property_key] = 2
-
-		return Rule(self,other_figure,rule_data)
+		return rule_data
 
 
 	def get_rule_create_delete(self):
