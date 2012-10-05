@@ -21,6 +21,11 @@ import pprint
 """
 
 def main():
+	if "-log" in sys.argv:
+		clean_log()
+	solve_project_1()
+
+def solve_project_1():
 	problem1XML = ET.parse("Representations/1-1.txt")
 	problem2XML = ET.parse("Representations/1-2.txt")
 	problem3XML = ET.parse("Representations/1-3.txt")
@@ -34,6 +39,11 @@ def main():
 		printSolution(problem3XML, "3")
 	if "-4" in sys.argv:
 		printSolution(problem4XML, "4")
+	if len(sys.argv) == 1:
+		printSolution(problem1XML, "1")
+		printSolution(problem2XML, "2")
+		printSolution(problem3XML, "3")
+		printSolution(problem4XML, "4")
 
 
 def printSolution(problem, problem_id):
@@ -41,7 +51,7 @@ def printSolution(problem, problem_id):
 	psolution = solve_analogy(pframes, pqframes, psolutions)
 	if len(psolution) == 1:
 		print "Problem " + str(problem_id) + ": " + psolution[0]['sframe']
-		print "Problem " + str(problem_id) + ": " + str(psolution)
+		# print "Problem " + str(problem_id) + ": " + str(psolution)
 	else:
 		print "\nProblem " + str(problem_id) + " had the following " + str(len(psolution)) + " solutions:"
 		for sol_index in range(len(psolution)):
