@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
 # debugging
 import pdb
+from sourcecode.log import *
 
 
 class Rule(object):
@@ -22,16 +23,23 @@ class Rule(object):
 			ruleStr = "rule too large for a single line!"
 		return ruleStr
 
-	# def __repr__(self):
-	# 	if self.createdelete != 0:
-	# 		return "<Rule: " + self.a_fig.shape + " - create-delete >"
-	# 	changes = ""
-	# 	for attribute in vars(self).keys():
-	# 		if vars(self)[attribute] != 0 and attribute != 'a_fig' and attribute != "b_fig":
-	# 			changes += " " + attribute + ","
-	# 	changes = changes if changes != "" else " No Change"
-	# 	ruleRepr = "<Rule: " + self.a_fig.shape + " - " + self.b_fig.shape + ":" + changes + ">"
-	# 	return ruleRepr
+	def __repr__(self):
+		if self.createdelete != 0:
+			if "shape" in self.a_fig.data.keys():
+			# if "shape" in self.data.keys():
+				return "<Rule: " + str(self.a_fig.data["shape"]) + " - create-delete >"
+			else:
+				print "Rule __repr__ this should not be happening 1"
+				print self.a_fig.data
+				print self.data
+				return "<Rule: " + str(self.a_fig.data) + " - create-delete >"
+		changes = ""
+		for attribute in self.data.keys():
+			if self.data[attribute] != 0 and attribute != 'a_fig' and attribute != "b_fig":
+				changes += " " + attribute + ","
+		changes = changes if changes != "" else " No Change"
+		ruleRepr = "<Rule: " + self.a_fig.data["shape"] + " - " + self.b_fig.data["shape"] + ":" + changes + ">"
+		return ruleRepr
 
 	def get_change_value(self):
 		if self.createdelete != 0:
@@ -39,6 +47,7 @@ class Rule(object):
 		# pdb.set_trace()
 		total_value = 0
 		for curr_key in self.data.keys(): total_value += self.data[curr_key] 
+		# log("get_change_value: " + str(total_value))
 		return total_value
 
 	def get_difference_with_rule(self, other_rule):
@@ -57,12 +66,40 @@ class Rule(object):
 				elif not (curr_self_fig == None and curr_other_fig == None):
 					total += 10
 
+
+		# log("first_difference: " + str(total))
+
 		# this compares the transformation of the self rule to the other_rule
-		for skey in self.data.keys():
-			if skey not in other_rule.data.keys():
-				total += 0 #4
-			else: 
+		# for skey in self.data.keys():
+		# 	if skey in other_rule.data.keys():
+		# 		total += 0 if self.data[skey] == other_rule.data[skey] else 2
+
+		# for okey in other_rule.data.keys():
+		# 	if okey in self.data.keys():
+		# 		total += 0 if other_rule.data[okey] == self.data[okey] else 2
+
+		if set(self.data.keys()) == set(other_rule.data.keys()):
+			for skey in self.data.keys():
 				total += 0 if self.data[skey] == other_rule.data[skey] else 2
+				# if self.data[skey] != other_rule.data[skey]:
+				# 	log( skey + ": " + str(self.data[skey]) + ", " + str(other_rule.data[skey]))
+		else:
+			print "\n\n\tnot currently handling rules with different attributes"
+			print "self.data.keys(): " + str(self.data.keys())
+			print "other_rule.data.keys(): " + str(other_rule.data.keys())
+			print "\n\n"
+
+
+		total += 0 if self.a_fig == other_rule.a_fig else 2
+		total += 0 if self.b_fig == other_rule.b_fig else 2
+		total += 0 if self.createdelete == other_rule.createdelete else 2
+
+		# if self.a_fig != other_rule.a_fig:
+		# 	log("a_fig" + ": " + str(self.a_fig) + ", " + str(other_rule.a_fig))
+		# if self.b_fig != other_rule.b_fig:
+		# 	log( "b_fig" + ": " + str(self.b_fig) + ", " + str(other_rule.b_fig))
+		# if self.createdelete != other_rule.createdelete:
+		# 	log( "createdelete" + ": " + str(self.createdelete) + ", " + str(other_rule.createdelete))
 
 
 		# difference = 0
@@ -74,4 +111,16 @@ class Rule(object):
 			# print "self.data.keys(): " + str(self.data.keys())
 			# print "other_rule.data.keys(): " + str(other_rule.data.keys())
 			# print "\n\n"
+		# change_keys = ""
+		# for curr_key in self.data.keys(): 
+		# 	change_keys += "," + str(curr_key) + "(" +str(self.a_fig.data[curr_key])+","+str(self.b_fig.data[curr_key])+ ")" if self.data[curr_key] != 0 else "" 
+		# log("get_change_value: " + str(self.get_change_value()) + ", " + str(other_rule.get_change_value()) + ": " + change_keys)
+		# log("get_difference_to_figure: " + str(self.a_fig.get_difference_to_figure(self.b_fig)))
+		log("get_difference_with_rule: " + str(total) + "\n")
+
+		# log("self.a_fig: " + str(self.a_fig))
+		# log("other_rule.a_fig: " + str(other_rule.a_fig))
+		# log("self.b_fig: " + str(self.b_fig))
+		# log("other_rule.b_fig: " + str(other_rule.b_fig))
+		# log("keys: " + str(self.data.keys()))
 		return total

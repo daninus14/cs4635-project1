@@ -2,6 +2,7 @@ import xml.etree.ElementTree as ET
 import sys 
 from sourcecode.Frame import *
 from sourcecode.Analogy import *
+from sourcecode.log import *
 import copy
 # for debugging
 import pdb
@@ -40,7 +41,7 @@ def printSolution(problem, problem_id):
 	psolution = solve_analogy(pframes, pqframes, psolutions)
 	if len(psolution) == 1:
 		print "Problem " + str(problem_id) + ": " + psolution[0]['sframe']
-		print "Problem " + str(problem_id) + str(psolution)
+		print "Problem " + str(problem_id) + ": " + str(psolution)
 	else:
 		print "\nProblem " + str(problem_id) + " had the following " + str(len(psolution)) + " solutions:"
 		for sol_index in range(len(psolution)):
