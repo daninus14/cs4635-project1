@@ -4,6 +4,56 @@ import pdb
 from sourcecode.log import *
 
 
+class SuperRule(object):
+	"""docstring for SuperRule"""
+	# def __init__(self, rule_a, rule_b):
+	# 	super(SuperRule, self).__init__()
+	# 	data = {}
+	# 	data["createdelete"] = rule_a.createdelete + rule_b.createdelete
+	# 	for rule in [rule_a, rule_b]:
+	# 		for k in rule.data.keys():
+	# 			if k in data.keys():
+	# 				data[k] += rule.data[k]
+	# 			else:
+	# 				data[k] = rule.data[k]
+	# 	self.data = data
+
+	def __init__(self, rule):
+		super(SuperRule, self).__init__()
+		data = {}
+		data["createdelete"] = rule.createdelete
+		for k in rule.data.keys():
+			data[k] = rule.data[k]
+		self.data = data
+
+	def __repr__(self):
+		change_keys = ""
+		for k,v in self.data.iteritems():
+			if v != 0: change_keys += ", " + str(k)
+		return "<SuperRule: " + str(self.get_change_value()) + " = " + change_keys + ">"
+
+	def combine_with_rule(self, rule):
+		self.data["createdelete"] += rule.createdelete
+		for k in rule.data.keys():
+				if k in self.data.keys():
+					self.data[k] += rule.data[k]
+				else:
+					self.data[k] = rule.data[k]
+
+	def get_change_value(self):
+		total_value = 0
+		for curr_key in self.data.keys(): total_value += self.data[curr_key] 
+		# log("get_change_value: " + str(total_value))
+		return total_value
+
+	def get_difference_with_super_rule(self, other_rule):
+		if other_rule == None: return self.get_change_value()
+		difference = 0
+		for curr_key in self.data.keys(): difference += abs(self.data[curr_key] - other_rule.data[curr_key])
+		return difference
+		
+
+
 class Rule(object):
 	"""docstring for Rule"""
 	def __init__(self, ga_fig, gb_fig, given_data, gcreatedelete=0):
@@ -69,15 +119,6 @@ class Rule(object):
 
 		# log("first_difference: " + str(total))
 
-		# this compares the transformation of the self rule to the other_rule
-		# for skey in self.data.keys():
-		# 	if skey in other_rule.data.keys():
-		# 		total += 0 if self.data[skey] == other_rule.data[skey] else 2
-
-		# for okey in other_rule.data.keys():
-		# 	if okey in self.data.keys():
-		# 		total += 0 if other_rule.data[okey] == self.data[okey] else 2
-
 		if set(self.data.keys()) == set(other_rule.data.keys()):
 			for skey in self.data.keys():
 				total += 0 if self.data[skey] == other_rule.data[skey] else 2
@@ -101,22 +142,12 @@ class Rule(object):
 		# if self.createdelete != other_rule.createdelete:
 		# 	log( "createdelete" + ": " + str(self.createdelete) + ", " + str(other_rule.createdelete))
 
-
-		# difference = 0
-		# if set(self.data.keys()) == set(other_rule.data.keys()):
-		# 	for skey in self.data.keys():
-		# 		total += 0 if self.data[skey] == other_rule.data[skey] else 2
-		# else:
-			# print "\n\n\tnot currently handling rules with different attributes"
-			# print "self.data.keys(): " + str(self.data.keys())
-			# print "other_rule.data.keys(): " + str(other_rule.data.keys())
-			# print "\n\n"
 		# change_keys = ""
 		# for curr_key in self.data.keys(): 
 		# 	change_keys += "," + str(curr_key) + "(" +str(self.a_fig.data[curr_key])+","+str(self.b_fig.data[curr_key])+ ")" if self.data[curr_key] != 0 else "" 
 		# log("get_change_value: " + str(self.get_change_value()) + ", " + str(other_rule.get_change_value()) + ": " + change_keys)
 		# log("get_difference_to_figure: " + str(self.a_fig.get_difference_to_figure(self.b_fig)))
-		log("get_difference_with_rule: " + str(total) + "\n")
+		# log("get_difference_with_rule: " + str(total) + "\n")
 
 		# log("self.a_fig: " + str(self.a_fig))
 		# log("other_rule.a_fig: " + str(other_rule.a_fig))

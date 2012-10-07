@@ -1,0 +1,113 @@
+<data missing="(2,2)">
+	<!-- Analogy Frames -->
+	<frame index="(1,1)">
+		<figure index="1">
+			<shape>pacman</shape>
+			<size>large</size>
+			<rotation_to_largest_vertical_line>0</rotation_to_largest_vertical_line>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>center</horizontal_location>
+			<vertical_reflection>True</vertical_reflection>
+			<horizontal_reflection>True</horizontal_reflection>
+		</figure>
+	</frame>
+
+	<frame index="(1,2)">
+		<figure index="1">
+			<shape>pacman</shape>
+			<size>large</size>
+			<rotation_to_largest_vertical_line>0</rotation_to_largest_vertical_line>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>center</horizontal_location>
+			<vertical_reflection>False</vertical_reflection>
+			<horizontal_reflection>True</horizontal_reflection>
+		</figure>
+	</frame>
+
+	<frame index="(2,1)">
+		<figure index="1">
+			<shape>pacmanfilled</shape>
+			<size>large</size>
+			<rotation_to_largest_vertical_line>0</rotation_to_largest_vertical_line>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>center</horizontal_location>
+			<vertical_reflection>True</vertical_reflection>
+			<horizontal_reflection>False</horizontal_reflection>
+		</figure>
+	</frame>
+
+	<!-- Solution Frames -->
+
+	<sframe index="1">
+		<figure index="1">
+			<shape>pacmanfilled</shape>
+			<size>large</size>
+			<rotation_to_largest_vertical_line>0</rotation_to_largest_vertical_line>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>center</horizontal_location>
+			<vertical_reflection>True</vertical_reflection>
+			<horizontal_reflection>False</horizontal_reflection>
+		</figure>
+	</sframe>
+
+	<sframe index="2">
+		<figure index="1">
+			<shape>pacman</shape>
+			<size>large</size>
+			<rotation_to_largest_vertical_line>0</rotation_to_largest_vertical_line>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>center</horizontal_location>
+			<vertical_reflection>False</vertical_reflection>
+			<horizontal_reflection>True</horizontal_reflection>
+		</figure>
+	</sframe>
+
+	<sframe index="3">
+		<figure index="1">
+			<shape>pacmanfilled</shape>
+			<size>large</size>
+			<rotation_to_largest_vertical_line>0</rotation_to_largest_vertical_line>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>center</horizontal_location>
+			<vertical_reflection>False</vertical_reflection>
+			<horizontal_reflection>False</horizontal_reflection>
+		</figure>
+	</sframe>
+
+	<sframe index="4">
+		<figure index="1">
+			<shape>pacman</shape>
+			<size>large</size>
+			<rotation_to_largest_vertical_line>0</rotation_to_largest_vertical_line>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>center</horizontal_location>
+			<vertical_reflection>False</vertical_reflection>
+			<horizontal_reflection>False</horizontal_reflection>
+		</figure>
+	</sframe>
+
+	<sframe index="5">
+		<figure index="1">
+			<shape>pacman</shape>
+			<size>large</size>
+			<rotation_to_largest_vertical_line>0</rotation_to_largest_vertical_line>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>center</horizontal_location>
+			<vertical_reflection>True</vertical_reflection>
+			<horizontal_reflection>False</horizontal_reflection>
+		</figure>
+	</sframe>
+
+	<sframe index="6">
+		<figure index="1">
+			<shape>pacmanfilled</shape>
+			<size>large</size>
+			<rotation_to_largest_vertical_line>0</rotation_to_largest_vertical_line>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>center</horizontal_location>
+			<vertical_reflection>True</vertical_reflection>
+			<horizontal_reflection>True</horizontal_reflection>
+		</figure>
+	</sframe>
+
+</data>

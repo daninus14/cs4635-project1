@@ -12,6 +12,8 @@ class Figure(object):
 
 		We consider something to be normal if largest portion is on the right of 
 			longest vertical line. Otherwise it is reflected.
+		vertical_reflection: False if largest portion on the right of longest vertical line, True otherwise
+		horizontal_reflection: False if largest portion on the right of longest horizontal line, True otherwise
 
 		rotation_to_largest_vertical_line is in degrees (360 = 0 = 2*pi)
 

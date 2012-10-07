@@ -44,6 +44,16 @@ def solve_project_2():
 		print_many_to_many_solution(problem3XML, "3")
 	if "-4" in sys.argv:
 		print_many_to_many_solution(problem4XML, "4")
+	if "-5" in sys.argv:
+		print_many_to_many_solution(problem5XML, "5")
+	if "-6" in sys.argv:
+		print_many_to_many_solution(problem6XML, "6")
+	if "-7" in sys.argv:
+		print_many_to_many_solution(problem7XML, "7")
+	if "-8" in sys.argv:
+		print_many_to_many_solution(problem8XML, "8")
+
+
 	if len(sys.argv) == 1:
 		print_many_to_many_solution(problem1XML, "1")
 		print_many_to_many_solution(problem2XML, "2")
@@ -51,8 +61,8 @@ def solve_project_2():
 		print_many_to_many_solution(problem4XML, "4")
 		print_many_to_many_solution(problem5XML, "5")
 		print_many_to_many_solution(problem6XML, "6")
-		# print_many_to_many_solution(problem7XML, "7")
-		# print_many_to_many_solution(problem8XML, "8")
+		print_many_to_many_solution(problem7XML, "7")
+		print_many_to_many_solution(problem8XML, "8")
 
 def solve_project_1():
 	problem1XML = ET.parse("Representations/1-1.txt")

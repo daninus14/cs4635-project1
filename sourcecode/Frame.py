@@ -8,13 +8,19 @@ class Frame:
 		self.figures = gfigures
 		self.index = gindex
 
+	def __str__(self):
+		return "Frame: " + str(self.index)
+
+	def __repr__(self):
+		return "<Frame: " + str(self.index) + ">"
+
 	@classmethod
 	def deSerializeXML(cls, xmlObject):
 		attributes = xmlObject.attrib
 		index = None
 		for k in attributes.keys():
 			if k == 'index':
-				index = attributes[k]
+				index = eval(attributes[k])
 			else:
 				print "attr: " + str(k) + " with value: " + str(attributes[k]) + " is not recognized"
 		figuresXML = xmlObject.getchildren()
