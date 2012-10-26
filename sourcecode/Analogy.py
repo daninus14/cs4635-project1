@@ -71,8 +71,8 @@ def solve_analogy_many_to_many(frames, solutions, missing):
 		solution_values.append({"row_sr_change_value":row_sr_change_value, "column_sr_change_value":column_sr_change_value, "sframe":sframe, "value": final_value})
 
 	solution_values.sort(key = lambda x: x["value"])
-	# print solution_values
-	
+	print solution_values
+	pdb.set_trace()
 	return solution_values[0]
 
 def get_frames_by_row_and_column(frames):

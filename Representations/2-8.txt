@@ -2,197 +2,430 @@
 	<!-- Analogy Frames -->
 	<frame index="(1,1)">
 		<figure index="1">
-			<shape>triangle</shape>
-			<size>large</size>
-			<rotation_to_largest_vertical_line>30</rotation_to_largest_vertical_line>
+			<shape>flippedtriangle</shape>
 			<vertical_location>center</vertical_location>
 			<horizontal_location>center</horizontal_location>
-			<vertical_reflection>False</vertical_reflection>
-			<horizontal_reflection>True</horizontal_reflection>
 		</figure>
 	</frame>
 
 	<frame index="(1,2)">
 		<figure index="1">
 			<shape>triangle</shape>
-			<size>large</size>
-			<rotation_to_largest_vertical_line>30</rotation_to_largest_vertical_line>
 			<vertical_location>center</vertical_location>
 			<horizontal_location>center</horizontal_location>
-			<vertical_reflection>False</vertical_reflection>
-			<horizontal_reflection>True</horizontal_reflection>
+		</figure>
+		<figure index="2">
+			<shape>triangle</shape>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>left</horizontal_location>
 		</figure>
 	</frame>
 
 	<frame index="(1,3)">
 		<figure index="1">
-			<shape>triangle</shape>
-			<size>large</size>
-			<rotation_to_largest_vertical_line>30</rotation_to_largest_vertical_line>
+			<shape>flippedtriangle</shape>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="2">
+			<shape>flippedtriangle</shape>
 			<vertical_location>center</vertical_location>
 			<horizontal_location>center</horizontal_location>
-			<vertical_reflection>False</vertical_reflection>
-			<horizontal_reflection>True</horizontal_reflection>
+		</figure>
+		<figure index="3">
+			<shape>flippedtriangle</shape>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>right</horizontal_location>
 		</figure>
 	</frame>
 
 	<frame index="(2,1)">
 		<figure index="1">
-			<shape>rhombo</shape>
-			<size>large</size>
-			<rotation_to_largest_vertical_line>30</rotation_to_largest_vertical_line>
+			<shape>triangle</shape>
+			<vertical_location>top</vertical_location>
+			<horizontal_location>center</horizontal_location>
+		</figure>
+		<figure index="2">
+			<shape>triangle</shape>
 			<vertical_location>center</vertical_location>
 			<horizontal_location>center</horizontal_location>
-			<vertical_reflection>False</vertical_reflection>
-			<horizontal_reflection>False</horizontal_reflection>
 		</figure>
 	</frame>
 
 	<frame index="(2,2)">
 		<figure index="1">
-			<shape>rhombo</shape>
-			<size>large</size>
-			<rotation_to_largest_vertical_line>30</rotation_to_largest_vertical_line>
+			<shape>flippedtriangle</shape>
+			<vertical_location>top</vertical_location>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="2">
+			<shape>flippedtriangle</shape>
+			<vertical_location>top</vertical_location>
+			<horizontal_location>center</horizontal_location>
+		</figure>
+		<figure index="3">
+			<shape>flippedtriangle</shape>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="4">
+			<shape>flippedtriangle</shape>
 			<vertical_location>center</vertical_location>
 			<horizontal_location>center</horizontal_location>
-			<vertical_reflection>False</vertical_reflection>
-			<horizontal_reflection>False</horizontal_reflection>
 		</figure>
 	</frame>
 
 	<frame index="(2,3)">
 		<figure index="1">
-			<shape>rhombo</shape>
-			<size>large</size>
-			<rotation_to_largest_vertical_line>30</rotation_to_largest_vertical_line>
+			<shape>triangle</shape>
+			<vertical_location>top</vertical_location>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="2">
+			<shape>triangle</shape>
+			<vertical_location>top</vertical_location>
+			<horizontal_location>center</horizontal_location>
+		</figure>
+		<figure index="3">
+			<shape>triangle</shape>
+			<vertical_location>top</vertical_location>
+			<horizontal_location>right</horizontal_location>
+		</figure>
+		<figure index="4">
+			<shape>triangle</shape>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="5">
+			<shape>triangle</shape>
 			<vertical_location>center</vertical_location>
 			<horizontal_location>center</horizontal_location>
-			<vertical_reflection>False</vertical_reflection>
-			<horizontal_reflection>False</horizontal_reflection>
+		</figure>
+		<figure index="6">
+			<shape>triangle</shape>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>right</horizontal_location>
 		</figure>
 	</frame>
 
 	<frame index="(3,1)">
 		<figure index="1">
-			<shape>circle</shape>
-			<size>large</size>
-			<rotation_to_largest_vertical_line>0</rotation_to_largest_vertical_line>
+			<shape>flippedtriangle</shape>
+			<vertical_location>top</vertical_location>
+			<horizontal_location>center</horizontal_location>
+		</figure>
+		<figure index="2">
+			<shape>flippedtriangle</shape>
 			<vertical_location>center</vertical_location>
 			<horizontal_location>center</horizontal_location>
-			<vertical_reflection>False</vertical_reflection>
-			<horizontal_reflection>False</horizontal_reflection>
+		</figure>
+		<figure index="3">
+			<shape>flippedtriangle</shape>
+			<vertical_location>bottom</vertical_location>
+			<horizontal_location>center</horizontal_location>
 		</figure>
 	</frame>
 
 	<frame index="(3,2)">
 		<figure index="1">
-			<shape>circle</shape>
-			<size>large</size>
-			<rotation_to_largest_vertical_line>0</rotation_to_largest_vertical_line>
+			<shape>triangle</shape>
+			<vertical_location>top</vertical_location>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="2">
+			<shape>triangle</shape>
+			<vertical_location>top</vertical_location>
+			<horizontal_location>center</horizontal_location>
+		</figure>
+		<figure index="3">
+			<shape>triangle</shape>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="4">
+			<shape>triangle</shape>
 			<vertical_location>center</vertical_location>
 			<horizontal_location>center</horizontal_location>
-			<vertical_reflection>False</vertical_reflection>
-			<horizontal_reflection>False</horizontal_reflection>
+		</figure>
+		<figure index="5">
+			<shape>triangle</shape>
+			<vertical_location>bottom</vertical_location>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="6">
+			<shape>triangle</shape>
+			<vertical_location>bottom</vertical_location>
+			<horizontal_location>center</horizontal_location>
 		</figure>
 	</frame>
+
 
 	<!-- Solution Frames -->
 
 	<sframe index="1">
 		<figure index="1">
-			<shape>rightarrow</shape>
-			<size>large</size>
-			<rotation_to_largest_vertical_line>0</rotation_to_largest_vertical_line>
+			<shape>flippedtriangle</shape>
+			<vertical_location>bottom</vertical_location>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="2">
+			<shape>flippedtriangle</shape>
+			<vertical_location>top</vertical_location>
+			<horizontal_location>center</horizontal_location>
+		</figure>
+		<figure index="3">
+			<shape>flippedtriangle</shape>
+			<vertical_location>bottom</vertical_location>
+			<horizontal_location>center</horizontal_location>
+		</figure>
+		<figure index="4">
+			<shape>flippedtriangle</shape>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="5">
+			<shape>flippedtriangle</shape>
 			<vertical_location>center</vertical_location>
 			<horizontal_location>center</horizontal_location>
-			<vertical_reflection>False</vertical_reflection>
-			<horizontal_reflection>False</horizontal_reflection>
+		</figure>
+		<figure index="6">
+			<shape>flippedtriangle</shape>
+			<vertical_location>top</vertical_location>
+			<horizontal_location>left</horizontal_location>
 		</figure>
 	</sframe>
 
 	<sframe index="2">
 		<figure index="1">
-			<shape>Lshapefilled</shape>
-			<size>large</size>
-			<rotation_to_largest_vertical_line>0</rotation_to_largest_vertical_line>
+			<shape>flippedtriangle</shape>
+			<vertical_location>bottom</vertical_location>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="2">
+			<shape>flippedtriangle</shape>
+			<vertical_location>bottom</vertical_location>
+			<horizontal_location>center</horizontal_location>
+		</figure>
+		<figure index="3">
+			<shape>flippedtriangle</shape>
+			<vertical_location>bottom</vertical_location>
+			<horizontal_location>right</horizontal_location>
+		</figure>
+		<figure index="4">
+			<shape>flippedtriangle</shape>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="5">
+			<shape>flippedtriangle</shape>
 			<vertical_location>center</vertical_location>
 			<horizontal_location>center</horizontal_location>
-			<vertical_reflection>True</vertical_reflection>
-			<horizontal_reflection>True</horizontal_reflection>
+		</figure>
+		<figure index="6">
+			<shape>flippedtriangle</shape>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>right</horizontal_location>
 		</figure>
 	</sframe>
 
 	<sframe index="3">
 		<figure index="1">
-			<shape>square</shape>
-			<size>large</size>
-			<rotation_to_largest_vertical_line>0</rotation_to_largest_vertical_line>
+			<shape>triangle</shape>
+			<vertical_location>top</vertical_location>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="2">
+			<shape>triangle</shape>
+			<vertical_location>top</vertical_location>
+			<horizontal_location>center</horizontal_location>
+		</figure>
+		<figure index="3">
+			<shape>triangle</shape>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="4">
+			<shape>triangle</shape>
 			<vertical_location>center</vertical_location>
 			<horizontal_location>center</horizontal_location>
-			<vertical_reflection>False</vertical_reflection>
-			<horizontal_reflection>False</horizontal_reflection>
+		</figure>
+		<figure index="5">
+			<shape>triangle</shape>
+			<vertical_location>bottom</vertical_location>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="6">
+			<shape>triangle</shape>
+			<vertical_location>bottom</vertical_location>
+			<horizontal_location>center</horizontal_location>
 		</figure>
 	</sframe>
 
 	<sframe index="4">
 		<figure index="1">
-			<shape>trianglefilled</shape>
-			<size>large</size>
-			<rotation_to_largest_vertical_line>30</rotation_to_largest_vertical_line>
+			<shape>triangle</shape>
+			<vertical_location>top</vertical_location>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="2">
+			<shape>triangle</shape>
 			<vertical_location>center</vertical_location>
-			<horizontal_location>center</horizontal_location>
-			<vertical_reflection>False</vertical_reflection>
-			<horizontal_reflection>True</horizontal_reflection>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="3">
+			<shape>triangle</shape>
+			<vertical_location>bottom</vertical_location>
+			<horizontal_location>left</horizontal_location>
 		</figure>
 	</sframe>
 
 	<sframe index="5">
 		<figure index="1">
-			<shape>circlefilled</shape>
-			<size>large</size>
-			<rotation_to_largest_vertical_line>0</rotation_to_largest_vertical_line>
+			<shape>triangle</shape>
+			<vertical_location>bottom</vertical_location>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="2">
+			<shape>triangle</shape>
+			<vertical_location>bottom</vertical_location>
+			<horizontal_location>center</horizontal_location>
+		</figure>
+		<figure index="3">
+			<shape>triangle</shape>
+			<vertical_location>bottom</vertical_location>
+			<horizontal_location>right</horizontal_location>
+		</figure>
+		<figure index="4">
+			<shape>triangle</shape>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="5">
+			<shape>triangle</shape>
 			<vertical_location>center</vertical_location>
 			<horizontal_location>center</horizontal_location>
-			<vertical_reflection>False</vertical_reflection>
-			<horizontal_reflection>False</horizontal_reflection>
+		</figure>
+		<figure index="6">
+			<shape>triangle</shape>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>right</horizontal_location>
+		</figure>
+		<figure index="7">
+			<shape>triangle</shape>
+			<vertical_location>top</vertical_location>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="8">
+			<shape>triangle</shape>
+			<vertical_location>top</vertical_location>
+			<horizontal_location>center</horizontal_location>
+		</figure>
+		<figure index="9">
+			<shape>triangle</shape>
+			<vertical_location>top</vertical_location>
+			<horizontal_location>right</horizontal_location>
 		</figure>
 	</sframe>
 
 	<sframe index="6">
 		<figure index="1">
 			<shape>triangle</shape>
-			<size>large</size>
-			<rotation_to_largest_vertical_line>30</rotation_to_largest_vertical_line>
+			<vertical_location>bottom</vertical_location>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="2">
+			<shape>triangle</shape>
+			<vertical_location>bottom</vertical_location>
+			<horizontal_location>center</horizontal_location>
+		</figure>
+		<figure index="3">
+			<shape>triangle</shape>
+			<vertical_location>bottom</vertical_location>
+			<horizontal_location>right</horizontal_location>
+		</figure>
+		<figure index="4">
+			<shape>triangle</shape>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="5">
+			<shape>triangle</shape>
 			<vertical_location>center</vertical_location>
 			<horizontal_location>center</horizontal_location>
-			<vertical_reflection>False</vertical_reflection>
-			<horizontal_reflection>True</horizontal_reflection>
+		</figure>
+		<figure index="6">
+			<shape>triangle</shape>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>right</horizontal_location>
 		</figure>
 	</sframe>
 
 	<sframe index="7">
 		<figure index="1">
-			<shape>circle</shape>
-			<size>large</size>
-			<rotation_to_largest_vertical_line>0</rotation_to_largest_vertical_line>
+			<shape>flippedtriangle</shape>
+			<vertical_location>top</vertical_location>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="2">
+			<shape>flippedtriangle</shape>
 			<vertical_location>center</vertical_location>
-			<horizontal_location>center</horizontal_location>
-			<vertical_reflection>False</vertical_reflection>
-			<horizontal_reflection>False</horizontal_reflection>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="3">
+			<shape>flippedtriangle</shape>
+			<vertical_location>bottom</vertical_location>
+			<horizontal_location>left</horizontal_location>
 		</figure>
 	</sframe>
 
 	<sframe index="8">
 		<figure index="1">
-			<shape>rhombofilled</shape>
-			<size>large</size>
-			<rotation_to_largest_vertical_line>30</rotation_to_largest_vertical_line>
+			<shape>flippedtriangle</shape>
+			<vertical_location>bottom</vertical_location>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="2">
+			<shape>flippedtriangle</shape>
+			<vertical_location>bottom</vertical_location>
+			<horizontal_location>center</horizontal_location>
+		</figure>
+		<figure index="3">
+			<shape>flippedtriangle</shape>
+			<vertical_location>bottom</vertical_location>
+			<horizontal_location>right</horizontal_location>
+		</figure>
+		<figure index="4">
+			<shape>flippedtriangle</shape>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="5">
+			<shape>flippedtriangle</shape>
 			<vertical_location>center</vertical_location>
 			<horizontal_location>center</horizontal_location>
-			<vertical_reflection>False</vertical_reflection>
-			<horizontal_reflection>False</horizontal_reflection>
+		</figure>
+		<figure index="6">
+			<shape>flippedtriangle</shape>
+			<vertical_location>center</vertical_location>
+			<horizontal_location>right</horizontal_location>
+		</figure>
+		<figure index="7">
+			<shape>flippedtriangle</shape>
+			<vertical_location>top</vertical_location>
+			<horizontal_location>left</horizontal_location>
+		</figure>
+		<figure index="8">
+			<shape>flippedtriangle</shape>
+			<vertical_location>top</vertical_location>
+			<horizontal_location>center</horizontal_location>
+		</figure>
+		<figure index="9">
+			<shape>flippedtriangle</shape>
+			<vertical_location>top</vertical_location>
+			<horizontal_location>right</horizontal_location>
 		</figure>
 	</sframe>
+
 
 
 </data>
