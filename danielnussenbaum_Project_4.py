@@ -3,7 +3,6 @@ import sys
 from sourcecode.Frame import *
 from sourcecode.Analogy import *
 from sourcecode.log import *
-from sourcecode.ImageRepresentation import *
 import copy
 # for debugging
 import pdb
