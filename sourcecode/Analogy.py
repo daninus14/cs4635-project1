@@ -1,20 +1,26 @@
-from sourcecode.Frame import *
+from Frame import *
 import xml.etree.ElementTree as ET
 import sys 
-from sourcecode.Frame import *
-from sourcecode.Analogy import *
-from sourcecode.log import *
+from Frame import *
+from Analogy import *
+from log import *
 import copy
 # for debugging
 import pdb
+from Test import *
 import pprint
 
 tags = [ "frame", "qframe", "sframe"]
+
+# __all__ = ["solve_analogy_many_to_many", "get_frames_by_row_and_column", "get_combinations_of_each_vector", "get_super_rules_by_vector",
+# 			"get_combinations_of_vector_with_element", "get_super_rule_from_vector"]
 
 
 def solve_analogy_many_to_many(frames, solutions, missing):
 
 	# print "missing: " + str(missing)
+
+	test_step_by_step(frames, solutions, missing)
 	
 	[frames_by_row, frames_by_column] = get_frames_by_row_and_column(frames)
 
@@ -71,9 +77,14 @@ def solve_analogy_many_to_many(frames, solutions, missing):
 		solution_values.append({"row_sr_change_value":row_sr_change_value, "column_sr_change_value":column_sr_change_value, "sframe":sframe, "value": final_value})
 
 	solution_values.sort(key = lambda x: x["value"])
-	print solution_values
-	pdb.set_trace()
-	return solution_values[0]
+	def valEquals(x): return x["value"] == solution_values[0]["value"]
+	my_sol = filter(valEquals, solution_values)
+	my_sol.sort(key = lambda x: x["sframe"].index)
+	pprint.pprint(my_sol)
+	# pprint.pprint( solution_values)
+	# pdb.set_trace()
+	# return solution_values[0]
+	return my_sol[0]
 
 def get_frames_by_row_and_column(frames):
 	frames_dictionary = {}
@@ -317,5 +328,51 @@ def deSerializeXML(problem):
 			solutions.append(Frame.deSerializeXML(frame))
 		else:
 			print "frame tag " + str(frame.tag) + " is not recognized"
+
+	needToEncode = False
+	for f in frames:
+		if type(f.index) is str:
+			needToEncode = True
+	if needToEncode:
+		for f in frames:
+			if len(frames) == 8:
+				# encode the 3x3 case
+				if f.index == 'A':
+					f.index = (1,1)
+				elif f.index == 'B':
+					f.index = (1,2)
+				elif f.index == 'C':
+					f.index = (1,3)
+				elif f.index == 'D':
+					f.index = (2,1)
+				elif f.index == 'E':
+					f.index = (2,2)
+				elif f.index == 'F':
+					f.index = (2,3)
+				elif f.index == 'G':
+					f.index = (3,1)
+				elif f.index == 'H':
+					f.index = (3,2)
+			elif len(frames) == 3:
+				# encode 2x2 case
+				if f.index == 'A':
+					f.index = (1,1)
+				elif f.index == 'B':
+					f.index = (1,2)
+				elif f.index == 'C':
+					f.index = (2,1)
+			else:
+				print "case not recognized! index of frame failed!"
+	square = 3 if len(frames) == 8 else 2
+	if missing_frame == "":
+		missing_frame = (0,0)
+		for i in range(square):
+			for j in range(square):
+				foundMissing = False
+				for f in frames:
+					if f.index == (i+1, j+1):
+						foundMissing = True
+				if not foundMissing: missing_frame = (i+1, j+1)
+
 
 	return [frames, questionFrames, solutions, missing_frame]

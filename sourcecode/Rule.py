@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as ET
 # debugging
 import pdb
-from sourcecode.log import *
+from log import *
 
 
 class SuperRule(object):

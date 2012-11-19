@@ -1,0 +1,277 @@
+<data>
+<frame index="A">
+<figure index="1">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>6</size>
+<shape>Line</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+<figure index="2">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>7</size>
+<shape>Circle</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+</frame>
+<sframe index="Ans1">
+<figure index="1">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>5</size>
+<shape>Line</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+<figure index="2">
+<x> 4</x>
+<y>7</y>
+<rotation> 180</rotation>
+<size>6</size>
+<shape>Line</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+<figure index="3">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>6</size>
+<shape>Plus</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+</sframe>
+<sframe index="Ans2">
+<figure index="1">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>7</size>
+<shape>Circle</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+</sframe>
+<sframe index="Ans3">
+<figure index="1">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>6</size>
+<shape>Line</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+<figure index="2">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>8</size>
+<shape>Plus</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+</sframe>
+<sframe index="Ans4">
+<figure index="1">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>7</size>
+<shape>Square</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+</sframe>
+<sframe index="Ans5">
+<figure index="1">
+<x> 4</x>
+<y>7</y>
+<rotation> 180</rotation>
+<size>6</size>
+<shape>Line</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+<figure index="2">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>7</size>
+<shape>Circle</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+</sframe>
+<sframe index="Ans6">
+<figure index="1">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>6</size>
+<shape>Line</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+<figure index="2">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>7</size>
+<shape>Square</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+</sframe>
+<sframe index="Ans7">
+<figure index="1">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>7</size>
+<shape>Square</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+</sframe>
+<sframe index="Ans8">
+<figure index="1">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>6</size>
+<shape>Line</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+<figure index="2">
+<x> 4</x>
+<y>4</y>
+<rotation> 180</rotation>
+<size>6</size>
+<shape>Line</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+</sframe>
+<frame index="B">
+<figure index="1">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>7</size>
+<shape>Circle</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+</frame>
+<frame index="C">
+<figure index="1">
+<x> 4</x>
+<y>7</y>
+<rotation> 180</rotation>
+<size>6</size>
+<shape>Line</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+<figure index="2">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>7</size>
+<shape>Circle</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+</frame>
+<frame index="D">
+<figure index="1">
+<x> 4</x>
+<y>7</y>
+<rotation> 180</rotation>
+<size>6</size>
+<shape>Line</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+<figure index="2">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>7</size>
+<shape>Square</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+</frame>
+<frame index="E">
+<figure index="1">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>6</size>
+<shape>Line</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+<figure index="2">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>7</size>
+<shape>Square</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+</frame>
+<frame index="F">
+<figure index="1">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>7</size>
+<shape>Square</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+</frame>
+<frame index="G">
+<figure index="1">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>8</size>
+<shape>Plus</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+</frame>
+<frame index="H">
+<figure index="1">
+<x> 4</x>
+<y>8</y>
+<rotation> 180</rotation>
+<size>6</size>
+<shape>Line</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+<figure index="2">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>8</size>
+<shape>Plus</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+</frame>
+</data>

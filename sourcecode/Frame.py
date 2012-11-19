@@ -1,6 +1,6 @@
 import xml.etree.ElementTree as ET
-from sourcecode.Figure import *
-from sourcecode.Rule import *
+from Figure import *
+from Rule import *
 
 class Frame:
 
@@ -19,8 +19,10 @@ class Frame:
 		attributes = xmlObject.attrib
 		index = None
 		for k in attributes.keys():
-			if k == 'index':
+			if k == 'index' and (k[0] == '(' or k[0].isdigit()):
 				index = eval(attributes[k])
+			elif k == 'index':
+				index = attributes[k]
 			else:
 				print "attr: " + str(k) + " with value: " + str(attributes[k]) + " is not recognized"
 		figuresXML = xmlObject.getchildren()

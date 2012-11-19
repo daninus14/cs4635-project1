@@ -1,0 +1,101 @@
+<data>
+<frame index="A">
+<figure index="1">
+<x> 2</x>
+<y>2</y>
+<rotation> 0</rotation>
+<size>4</size>
+<shape>Pacman</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+</frame>
+<sframe index="Ans1">
+<figure index="1">
+<x> 2</x>
+<y>2</y>
+<rotation> 270</rotation>
+<size>5</size>
+<shape>Pacman</shape>
+<filled>1</filled>
+<reflected>0</reflected>
+</figure>
+</sframe>
+<sframe index="Ans2">
+<figure index="1">
+<x> 2</x>
+<y>2</y>
+<rotation> 0</rotation>
+<size>4</size>
+<shape>Pacman</shape>
+<filled>0</filled>
+<reflected>1</reflected>
+</figure>
+</sframe>
+<sframe index="Ans3">
+<figure index="1">
+<x> 2</x>
+<y>2</y>
+<rotation> 270</rotation>
+<size>5</size>
+<shape>Pacman</shape>
+<filled>1</filled>
+<reflected>1</reflected>
+</figure>
+</sframe>
+<sframe index="Ans4">
+<figure index="1">
+<x> 3</x>
+<y>3</y>
+<rotation> 270</rotation>
+<size>4</size>
+<shape>Pacman</shape>
+<filled>0</filled>
+<reflected>1</reflected>
+</figure>
+</sframe>
+<sframe index="Ans5">
+<figure index="1">
+<x> 2</x>
+<y>2</y>
+<rotation> 270</rotation>
+<size>4</size>
+<shape>Pacman</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+</sframe>
+<sframe index="Ans6">
+<figure index="1">
+<x> 2</x>
+<y>2</y>
+<rotation> 0</rotation>
+<size>5</size>
+<shape>Pacman</shape>
+<filled>1</filled>
+<reflected>0</reflected>
+</figure>
+</sframe>
+<frame index="B">
+<figure index="1">
+<x> 2</x>
+<y>2</y>
+<rotation> 0</rotation>
+<size>4</size>
+<shape>Pacman</shape>
+<filled>0</filled>
+<reflected>1</reflected>
+</figure>
+</frame>
+<frame index="C">
+<figure index="1">
+<x> 2</x>
+<y>2</y>
+<rotation> 270</rotation>
+<size>5</size>
+<shape>Pacman</shape>
+<filled>1</filled>
+<reflected>0</reflected>
+</figure>
+</frame>
+</data>

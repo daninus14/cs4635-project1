@@ -1,0 +1,186 @@
+<frame index="7Ans8">
+<figure index="1">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>3</size>
+<shape>Circle</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+</frame>
+<frame index="7Ans7">
+<figure index="1">
+<x> 6</x>
+<y>3</y>
+<rotation> 0</rotation>
+<size>2</size>
+<shape>Triangle</shape>
+<filled>1</filled>
+<reflected>0</reflected>
+</figure>
+<figure index="2">
+<x> 3</x>
+<y>6</y>
+<rotation> 0</rotation>
+<size>0</size>
+<shape>Pacman</shape>
+<filled>1</filled>
+<reflected>1</reflected>
+</figure>
+</frame>
+<frame index="7Ans8">
+<figure index="1">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>3</size>
+<shape>Circle</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+</frame>
+<frame index="7Ans7">
+<figure index="1">
+<x> 6</x>
+<y>3</y>
+<rotation> 0</rotation>
+<size>2</size>
+<shape>Triangle</shape>
+<filled>1</filled>
+<reflected>0</reflected>
+</figure>
+<figure index="2">
+<x> 3</x>
+<y>6</y>
+<rotation> 0</rotation>
+<size>0</size>
+<shape>Pacman</shape>
+<filled>1</filled>
+<reflected>1</reflected>
+</figure>
+</frame>
+<frame index="7Ans8">
+<figure index="1">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>3</size>
+<shape>Circle</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+</frame>
+<frame index="7Ans7">
+<figure index="1">
+<x> 6</x>
+<y>3</y>
+<rotation> 0</rotation>
+<size>2</size>
+<shape>Triangle</shape>
+<filled>1</filled>
+<reflected>0</reflected>
+</figure>
+<figure index="2">
+<x> 3</x>
+<y>6</y>
+<rotation> 0</rotation>
+<size>0</size>
+<shape>Pacman</shape>
+<filled>1</filled>
+<reflected>1</reflected>
+</figure>
+</frame>
+<frame index="7Ans7">
+<figure index="1">
+<x> 6</x>
+<y>3</y>
+<rotation> 0</rotation>
+<size>2</size>
+<shape>Triangle</shape>
+<filled>1</filled>
+<reflected>0</reflected>
+</figure>
+<figure index="2">
+<x> 3</x>
+<y>6</y>
+<rotation> 0</rotation>
+<size>0</size>
+<shape>Pacman</shape>
+<filled>1</filled>
+<reflected>1</reflected>
+</figure>
+</frame>
+<frame index="7Ans8">
+<figure index="1">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>3</size>
+<shape>Circle</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+</frame>
+<frame index="7Ans7">
+<figure index="1">
+<x> 6</x>
+<y>3</y>
+<rotation> 0</rotation>
+<size>2</size>
+<shape>Triangle</shape>
+<filled>1</filled>
+<reflected>0</reflected>
+</figure>
+<figure index="2">
+<x> 3</x>
+<y>6</y>
+<rotation> 0</rotation>
+<size>0</size>
+<shape>Pacman</shape>
+<filled>1</filled>
+<reflected>1</reflected>
+</figure>
+</frame>
+<frame index="7Ans8">
+<figure index="1">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>3</size>
+<shape>Circle</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+</frame>
+<frame index="7Ans7">
+<figure index="1">
+<x> 6</x>
+<y>3</y>
+<rotation> 0</rotation>
+<size>2</size>
+<shape>Triangle</shape>
+<filled>1</filled>
+<reflected>0</reflected>
+</figure>
+<figure index="2">
+<x> 3</x>
+<y>6</y>
+<rotation> 0</rotation>
+<size>0</size>
+<shape>Pacman</shape>
+<filled>1</filled>
+<reflected>1</reflected>
+</figure>
+</frame>
+<frame index="7Ans8">
+<figure index="1">
+<x> 4</x>
+<y>4</y>
+<rotation> 0</rotation>
+<size>3</size>
+<shape>Circle</shape>
+<filled>0</filled>
+<reflected>0</reflected>
+</figure>
+</frame>

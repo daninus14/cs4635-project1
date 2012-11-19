@@ -1,8 +1,8 @@
 import xml.etree.ElementTree as ET
 # debugging
 import pdb 
-from sourcecode.Rule import *
-from sourcecode.log import *
+from Rule import *
+from log import *
 
 class Figure(object):
 	""" docstring for Figure
