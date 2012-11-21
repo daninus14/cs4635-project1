@@ -3,6 +3,7 @@ import sys
 from sourcecode.Frame import *
 from sourcecode.Analogy import *
 from sourcecode.log import *
+from sourcecode.ImageRepresentationExtractor import *
 import copy
 # for debugging
 import pdb
@@ -35,7 +36,48 @@ import time
 def main():
 	if "-log" in sys.argv:
 		clean_log()
-	solve_project_3()
+	# solve_project_4()
+	helloWorldImage("Representations/Frames/Problem 4/3-4Ans2.png")
+
+def solve_project_4():
+	problem1XML = ET.parse("Representations/4-1.txt")
+	problem2XML = ET.parse("Representations/4-2.txt")
+	problem3XML = ET.parse("Representations/4-3.txt")
+	problem4XML = ET.parse("Representations/4-4.txt")
+	problem5XML = ET.parse("Representations/4-5.txt")
+	problem6XML = ET.parse("Representations/4-6.txt")
+	problem7XML = ET.parse("Representations/4-7.txt")
+	problem8XML = ET.parse("Representations/4-8.txt")
+
+
+	if "-1" in sys.argv:
+		print_many_to_many_solution_project3(problem1XML, "1")
+	if "-2" in sys.argv:
+		print_many_to_many_solution_project3(problem2XML, "2")
+	if "-3" in sys.argv:
+		print_many_to_many_solution_project3(problem3XML, "3")
+	if "-4" in sys.argv:
+		print_many_to_many_solution_project3(problem4XML, "4")
+	if "-5" in sys.argv:
+		print_many_to_many_solution_project3(problem5XML, "5")
+	if "-6" in sys.argv:
+		print_many_to_many_solution_project3(problem6XML, "6")
+	if "-7" in sys.argv:
+		print_many_to_many_solution_project3(problem7XML, "7")
+	if "-8" in sys.argv:
+		print_many_to_many_solution_project3(problem8XML, "8")
+
+
+	if len(sys.argv) == 1:
+		print_many_to_many_solution_project3(problem1XML, "1")
+		print_many_to_many_solution_project3(problem2XML, "2")
+		print_many_to_many_solution_project3(problem3XML, "3")
+		print_many_to_many_solution_project3(problem4XML, "4")
+		print_many_to_many_solution_project3(problem5XML, "5")
+		print_many_to_many_solution_project3(problem6XML, "6")
+		print_many_to_many_solution_project3(problem7XML, "7")
+		print_many_to_many_solution_project3(problem8XML, "8")
+
 
 
 def solve_project_3():
