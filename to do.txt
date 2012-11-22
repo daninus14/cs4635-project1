@@ -14,19 +14,43 @@ Check filled vs. unfilled (edge detection)
 Multiple shapes not working (compact all inverted black space and then get picture difference count!)
 	consider adding another shape to the right, and below
 
+take the shape, if other has larger box, compare this shape with crop of other same box...if same, then
+	turn all adjacent white lines into 1
+	check size, if longer only on one axis try to see if taking a crop of the other side and comparing it works
+
+
 3x3
+-----------
+count number of pixel change
+add that change to and find which new one has the same change (when considering this, see if the pixel change is the same accross rows and if it grows geometrically accross columns)
+unless of course there is a transformation that works!
 
 
 
 
 
-Problem 1 :		4
-Problem 2 :		2
-Problem 3 :		3
+								Problem 1 :		4
+								Problem 2 :		2
+								Problem 3 :		3
 Problem 4 :		7
 Problem 5 :		3
 Problem 6 :		5
-Problem 7 :		2
+								Problem 7 :		2
 Problem 8 :		8
 Problem 9 :		8
 Problem 10 :	7	
+
+
+Find contiguous shape: list of black values and locations
+<!-- then get the bbox surrounding this? -->
+Create new image of same size as before. Now paste the values or put them. 
+copy original b, remove all values of that shape, repeat process until no shapes left
+compare shape in a with each of the new image shapes
+pick best difference value between mappings (of all possible combinations do sum of each)
+
+add image, white line on right, then same shape and compare pixel by pixel with original
+add image, white line below, then same shape and compare pixel by pixel with original
+add image, white line on right and below, then same shape and compare pixel by pixel with original
+add image, white line on right and above, then same shape and compare pixel by pixel with original
+
+

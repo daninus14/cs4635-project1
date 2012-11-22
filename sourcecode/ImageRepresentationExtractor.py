@@ -13,8 +13,10 @@ import pprint
 def helloWorldImage(imagePath):
 	# Problem1ImageSolver()
 	print "Problem 1: " + ABC_solver("Representations/Frames/Problem 1/")
+	print "Problem 2: " + ABC_solver("Representations/Frames/Problem 2/")
 	print "Problem 3: " + ABC_solver("Representations/Frames/Problem 3/")
 	print "Problem 7: " + ABC_solver("Representations/Frames/Problem 7/")
+	print "Problem 9: " + ABC_solver("Representations/Frames/Problem 9/")
 	# invert_and_save()
 	# ABC_solver("Representations/Frames/Problem 2/")
 
@@ -273,6 +275,8 @@ def ABC_solver(images_path):
 	a_key = dirImagesQuestions.keys()[0]
 	b_key = dirImagesQuestions.keys()[0]
 	c_key = dirImagesQuestions.keys()[0]
+	multiple_images = False
+
 	for k,v in dirImagesQuestions.iteritems():
 		if "A" in k or "a" in k:
 			a_key = k
@@ -283,37 +287,77 @@ def ABC_solver(images_path):
 		if count_nonzero(asarray(v)) > size(asarray(v)) - count_nonzero(asarray(v)):
 			dirImagesQuestions[k] = ImageChops.invert(v)
 			dirImagesQuestions[k] = dirImagesQuestions[k].crop(dirImagesQuestions[k].getbbox())
-			# dirImagesQuestions[k] = compress_white_lines(dirImagesQuestions[k])
+			[dirImagesQuestions[k], k_multiple_images] = compress_white_lines(dirImagesQuestions[k])
+			if k_multiple_images: multiple_images = k_multiple_images
 	
 	# consider looping through possible a_b image equality changes until we find the one that has a match for c
 	# perhaps only add those 10% close to the best image equality change for a_b
-	a_b_transform = check_shape_equality(dirImagesQuestions[a_key], dirImagesQuestions[b_key])
-	a_c_transform = check_shape_equality(dirImagesQuestions[a_key], dirImagesQuestions[c_key])
+	if not multiple_images:
+		a_b_transform = check_shape_equality(dirImagesQuestions[a_key], dirImagesQuestions[b_key])
+		a_c_transform = check_shape_equality(dirImagesQuestions[a_key], dirImagesQuestions[c_key])
+	else:
+		b_size = dirImagesQuestions[b_key].size
+		a_size = dirImagesQuestions[a_key].size
+		a_bbox = dirImagesQuestions[a_key].getbbox()
+		horizontal_shapes = (b_size[0] - (b_size[0] % a_size[0]))/ a_size[0]
+		vertical_shapes = (b_size[1] - (b_size[1] % a_size[1]))/ a_size[1]
+		
+		if horizontal_shapes > 1:
+			a_b_horizontal_transform_1 = check_shape_equality(dirImagesQuestions[a_key], dirImagesQuestions[b_key].crop(a_bbox))
+			# for shapes in range(horizontal_shapes-1): do this for the 3x3 case!
+			# 	print "a"
+			# pdb.set_trace()
+			b_bbox_2 = (a_bbox[0] + a_bbox[2]+1,0,a_bbox[2]+1 + a_bbox[2],a_bbox[3])
+			a_b_horizontal_transform_2 = check_shape_equality(dirImagesQuestions[a_key], dirImagesQuestions[b_key].crop(b_bbox_2))
+		diff_transforms = abs(a_b_horizontal_transform_2[2] - a_b_horizontal_transform_1[2])
+		max_transforms = max(a_b_horizontal_transform_2[2], a_b_horizontal_transform_1[2])
+		if max_transforms == 0 or ((0.0+diff_transforms)/max_transforms) < 0.05:
+			a_b_transform = a_b_horizontal_transform_2 + [horizontal_shapes, vertical_shapes]
+
 	# print a_b_transform
 	answers_dic = {}
+	answers_data_dic = {}
 	c_x_transform_best = None
 	best_k = None
 
 	for k,v in dirImagesAnswers.iteritems():
 		if count_nonzero(asarray(v)) > size(asarray(v)) - count_nonzero(asarray(v)):
 			dirImagesAnswers[k] = ImageChops.invert(v)
-			# check if there is only one shape. Then check if box coordinates of each frames shape are somewhat similar
-			# if they are, then do edgesImage.crop(edgesImage.getbbox())
-			# since I am now only solving the 1st problem, I am going to go ahead and do it
-			# TODO TO DO CHANGE THIS LINE BELOW, READ COMMENT ABOVE!
-			# also considering doing the line below separate than what is above, i.e. outside the if statement
 			dirImagesAnswers[k] = dirImagesAnswers[k].crop(dirImagesAnswers[k].getbbox())
+			[dirImagesAnswers[k], k_multiple_images] = compress_white_lines(dirImagesAnswers[k])
+			answers_data_dic[k] = k_multiple_images
 
-		curr_answer = get_transformation_value(dirImagesQuestions[c_key], a_b_transform[0][0], a_b_transform[0][1] ,dirImagesAnswers[k])
-		answers_dic[k] = curr_answer
-		if c_x_transform_best == None:
-			c_x_transform_best = curr_answer
-			best_k = k
-		elif c_x_transform_best[2] > curr_answer[2]:
-			c_x_transform_best = curr_answer
-			best_k = k
+		if not multiple_images:
+			curr_answer = get_transformation_value(dirImagesQuestions[c_key], a_b_transform[0][0], a_b_transform[0][1] ,dirImagesAnswers[k])
+			answers_dic[k] = curr_answer
+			if c_x_transform_best == None:
+				c_x_transform_best = curr_answer
+				best_k = k
+			elif c_x_transform_best[2] > curr_answer[2]:
+				c_x_transform_best = curr_answer
+				best_k = k
+		elif k in answers_data_dic.keys() and answers_data_dic[k]:
+			# pdb.set_trace()
+			if a_b_transform[3] > 1:
+				# pdb.set_trace()
+				curr_ans_img = dirImagesAnswers[k]
+				rot = a_b_transform[0][0]
+				ref = a_b_transform[0][1]
+				c_img = dirImagesQuestions[c_key]
+				c_bbox = c_img.getbbox()
+				ans_bbox_2 = (c_bbox[0] + c_bbox[2]+1,0,c_bbox[2]+1 + c_bbox[2],c_bbox[3])
+				# pdb.set_trace()
+				if curr_ans_img.size[0] > c_img.size[0]*2:
+					curr_answer = get_transformation_value(c_img, rot, ref ,curr_ans_img.crop(ans_bbox_2))
+					answers_dic[k] = curr_answer
+					if c_x_transform_best == None:
+						c_x_transform_best = curr_answer
+						best_k = k
+					elif c_x_transform_best[2] > curr_answer[2]:
+						c_x_transform_best = curr_answer
+						best_k = k
+			# print "check image equality, and number of shapes..."
 
-	# print "Solution for " + str(k)
 	return best_k #+ " with value " + str(c_x_transform_best[2])
 	# pprint.pprint(answers_dic)
 
@@ -342,4 +386,48 @@ def get_transformation_value(image_a, rot, ref, image_b):
 	return [(rot, ref), transform_names[rot] + " and " + transform_names[ref], curr_best_diff]
 
 def compress_white_lines(image_a):
-	print "hello world!"
+	a = asarray(image_a)
+	lines_compressed = False
+	temp_array = []
+	black = False
+	for line_i in range(len(a)):
+		curr_row = a[line_i]
+		all_black = True
+		for value in curr_row:
+			if not (value == numpy.array([0,0,0,0])).all():
+				all_black = False
+		if not all_black:
+			temp_array += [curr_row]
+			black = False
+		elif not black:
+			temp_array += [curr_row]
+			black = True
+		else: lines_compressed = True
+	new_array = numpy.array(temp_array)
+
+	new_image = Image.fromarray(new_array).transpose(Image.ROTATE_90)
+
+
+	new_array = asarray(new_image)
+	
+	temp_array = []
+	black = False
+	for line_i in range(len(new_array)):
+		curr_row = new_array[line_i]
+		all_black = True
+		for value in curr_row:
+			# pdb.set_trace()
+			if not (value == numpy.array([0,0,0,0])).all():
+				all_black = False
+		if not all_black:
+			temp_array += [curr_row]
+			black = False
+		elif not black:
+			temp_array += [curr_row]
+			black = True
+		else: lines_compressed = True
+
+	new_array = numpy.array(temp_array)
+	new_image = Image.fromarray(new_array).rotate(-90)
+
+	return [new_image, lines_compressed]
