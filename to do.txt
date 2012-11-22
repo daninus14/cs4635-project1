@@ -1,0 +1,32 @@
+check number of shapes. check if figures are equal or not
+
+
+find transformation and what shape was added and where in respect to the other...
+
+then apply transformation to C
+
+Problems:
+================
+2x2
+-----------
+Horizontal but no Vertical comparisons
+Check filled vs. unfilled (edge detection)
+Multiple shapes not working (compact all inverted black space and then get picture difference count!)
+	consider adding another shape to the right, and below
+
+3x3
+
+
+
+
+
+Problem 1 :		4
+Problem 2 :		2
+Problem 3 :		3
+Problem 4 :		7
+Problem 5 :		3
+Problem 6 :		5
+Problem 7 :		2
+Problem 8 :		8
+Problem 9 :		8
+Problem 10 :	7	

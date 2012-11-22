@@ -8,9 +8,20 @@ from numpy import *
 import numpy
 import ImageChops
 import os
+import pprint
 
 def helloWorldImage(imagePath):
-	Problem1ImageSolver()
+	# Problem1ImageSolver()
+	print "Problem 1: " + ABC_solver("Representations/Frames/Problem 1/")
+	print "Problem 3: " + ABC_solver("Representations/Frames/Problem 3/")
+	print "Problem 7: " + ABC_solver("Representations/Frames/Problem 7/")
+	# invert_and_save()
+	# ABC_solver("Representations/Frames/Problem 2/")
+
+def invert_and_save():
+	a = Image.open("Representations/Frames/Problem 7/C.png")
+	a = a.transpose(Image.FLIP_LEFT_RIGHT)
+	a.save("Representations/Frames/Problem 7/Cnew.png")
 
 def helloWorldImage1(imagePath):
 	print "hello world!"
@@ -61,7 +72,6 @@ def helloWorldImage1(imagePath):
 	# subprocess.call(('xdg-open', "my_new_image.jpg"))
 
 def Problem1ImageSolver():
-	ABC_solver("Representations/Frames/Problem 1/")
 
 	[dirImagesQuestions, dirImagesAnswers] = get_images_for_directory("Representations/Frames/Problem 1/")
 	print "Problem 1 Image Questions: \n=================="
@@ -182,13 +192,25 @@ def check_shape_equality(image_a, image_b):
 	difference_acceptance = 0.05
 	a_pixels = count_nonzero(asarray(curr_a))
 	b_pixels = count_nonzero(asarray(curr_b))
+
+	# if a_pixels > b_pixels:
+	# 	a_edges = count_nonzero(asarray(curr_a.filter(ImageFilter.FIND_EDGES)))
+	# 	b_edges = b_pixels
+	# else:
+	# 	b_edges = count_nonzero(asarray(curr_b.filter(ImageFilter.FIND_EDGES)))
+	# 	a_edges = a_pixels
+	# image_a.filter(ImageFilter.FIND_EDGES)
+
+
+
 	# pdb.set_trace()
 	if (abs(0.0 + a_pixels-b_pixels)/max(a_pixels, b_pixels)) < difference_acceptance:
-		best_rotation = find_best_rotation(curr_a, curr_b)
+		best_rotation = find_best_transformation(curr_a, curr_b)
 		return best_rotation
+
 	else: return False
 
-def find_best_rotation(image_a, image_b):
+def find_best_transformation(image_a, image_b):
 	""" 
 	This method assumes the images passed to it are contiguous shapes and have no inner shapes 
 	It further assumes that the images provided are the cropped bboxes of the shapes
@@ -229,6 +251,9 @@ def find_best_rotation(image_a, image_b):
 				diff_ab = temp_diff_ab
 				curr_best_transform = (rot,ref)
 
+	# print "transforms_values_dic"
+	# pprint.pprint(transforms_values_dic)
+	# print "\n"
 	return [curr_best_transform, transform_names[curr_best_transform[0]] + " and " + transform_names[curr_best_transform[1]], curr_best_diff]
 
 
@@ -241,4 +266,80 @@ def find_best_rotation(image_a, image_b):
 # 	for i in range(size())
 
 def ABC_solver(images_path):
-	print "hello!"
+	""" This solver is meant for solving 2x2 matrices with a missing frame """
+
+	[dirImagesQuestions, dirImagesAnswers] = get_images_for_directory(images_path)
+
+	a_key = dirImagesQuestions.keys()[0]
+	b_key = dirImagesQuestions.keys()[0]
+	c_key = dirImagesQuestions.keys()[0]
+	for k,v in dirImagesQuestions.iteritems():
+		if "A" in k or "a" in k:
+			a_key = k
+		if "B" in k or "b" in k:
+			b_key = k
+		if "C" in k or "c" in k:
+			c_key = k
+		if count_nonzero(asarray(v)) > size(asarray(v)) - count_nonzero(asarray(v)):
+			dirImagesQuestions[k] = ImageChops.invert(v)
+			dirImagesQuestions[k] = dirImagesQuestions[k].crop(dirImagesQuestions[k].getbbox())
+			# dirImagesQuestions[k] = compress_white_lines(dirImagesQuestions[k])
+	
+	# consider looping through possible a_b image equality changes until we find the one that has a match for c
+	# perhaps only add those 10% close to the best image equality change for a_b
+	a_b_transform = check_shape_equality(dirImagesQuestions[a_key], dirImagesQuestions[b_key])
+	a_c_transform = check_shape_equality(dirImagesQuestions[a_key], dirImagesQuestions[c_key])
+	# print a_b_transform
+	answers_dic = {}
+	c_x_transform_best = None
+	best_k = None
+
+	for k,v in dirImagesAnswers.iteritems():
+		if count_nonzero(asarray(v)) > size(asarray(v)) - count_nonzero(asarray(v)):
+			dirImagesAnswers[k] = ImageChops.invert(v)
+			# check if there is only one shape. Then check if box coordinates of each frames shape are somewhat similar
+			# if they are, then do edgesImage.crop(edgesImage.getbbox())
+			# since I am now only solving the 1st problem, I am going to go ahead and do it
+			# TODO TO DO CHANGE THIS LINE BELOW, READ COMMENT ABOVE!
+			# also considering doing the line below separate than what is above, i.e. outside the if statement
+			dirImagesAnswers[k] = dirImagesAnswers[k].crop(dirImagesAnswers[k].getbbox())
+
+		curr_answer = get_transformation_value(dirImagesQuestions[c_key], a_b_transform[0][0], a_b_transform[0][1] ,dirImagesAnswers[k])
+		answers_dic[k] = curr_answer
+		if c_x_transform_best == None:
+			c_x_transform_best = curr_answer
+			best_k = k
+		elif c_x_transform_best[2] > curr_answer[2]:
+			c_x_transform_best = curr_answer
+			best_k = k
+
+	# print "Solution for " + str(k)
+	return best_k #+ " with value " + str(c_x_transform_best[2])
+	# pprint.pprint(answers_dic)
+
+
+def get_transformation_value(image_a, rot, ref, image_b):
+	""" 
+	This method assumes the images passed to it are contiguous shapes and have no inner shapes 
+	It further assumes that the images provided are the cropped bboxes of the shapes
+
+	"""
+	# rotations = [None, Image.ROTATE_90, Image.ROTATE_180, Image.ROTATE_270]
+	# reflections = [None, Image.FLIP_LEFT_RIGHT, Image.FLIP_TOP_BOTTOM]
+	transform_names = {Image.FLIP_LEFT_RIGHT: "Image.FLIP_LEFT_RIGHT", Image.FLIP_TOP_BOTTOM: "Image.FLIP_TOP_BOTTOM", 
+						Image.ROTATE_90:"Image.ROTATE_90", Image.ROTATE_180:"Image.ROTATE_180", Image.ROTATE_270:"Image.ROTATE_270",
+						None: "None"}
+
+	temp_image_b = ImageChops.duplicate(image_b)
+	if rot != None:
+		temp_image_b = temp_image_b.transpose(rot)
+	if ref != None:
+		temp_image_b = temp_image_b.transpose(ref)
+	
+	temp_diff_ab = ImageChops.difference(image_a, temp_image_b)
+	curr_best_diff = count_nonzero(asarray(temp_diff_ab))
+
+	return [(rot, ref), transform_names[rot] + " and " + transform_names[ref], curr_best_diff]
+
+def compress_white_lines(image_a):
+	print "hello world!"
